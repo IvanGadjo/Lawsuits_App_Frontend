@@ -1,0 +1,71 @@
+import React,{Component} from "react";
+import {Link} from "react-router-dom";
+
+
+class Cases extends Component{
+
+
+    render() {
+
+        return (
+            <div>
+                <h2>Cases:</h2>
+
+                <Link to={"/cases/add"}>
+                    <button>Add new case</button>
+                </Link>
+
+                <table id={"cases-table"}>
+                    <thead>
+                        <tr>
+
+                                <th>Case number</th>
+                                <th>Case name</th>
+                                <th>Created at</th>
+                                <th>Basis</th>
+                                <th>Value</th>
+                                <th>Is executed</th>
+                                <th>Proxy</th>
+                                <th>Employees</th>
+                                <th>Documents</th>
+                                <th>PHASE</th>
+                                <th>Actions</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>123</td>
+                            <td>case 1</td>
+                            <td>01.01.2020</td>
+                            <td>/</td>
+                            <td>30 000</td>
+                            <td>no</td>
+                            <td>/</td>
+                            <td>
+                                <Link to={"/employees"}>
+                                    <button>All Employees</button>
+                                </Link>
+                            </td>
+                            <td>
+                                <Link to={"/documents"}>
+                                    <button>All documents</button>
+                                </Link>
+                            </td>
+                            <td>At trial</td>
+                            <td>
+                                <button>Edit</button>
+                                <button>Delete</button>
+                                <button>Add document</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        );
+    }
+
+}
+
+export default Cases;
