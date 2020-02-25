@@ -1,18 +1,27 @@
 import React,{Component} from 'react';
-import {BrowserRouter as Router, Redirect, Route} from "react-router-dom";
+import {BrowserRouter as Router, Link, Redirect, Route} from "react-router-dom";
 import './App.css';
 import Home from '../src/components/home'
 import Header from '../src/components/header'
-import LogIn from  '../src/components/logIn'
+
 import Cases from "./components/cases/cases";
 import Documents from "./components/documents/documents";
 import Employees from "./components/employees/employees";
 import AddCase from "./components/cases/addCase";
+import AuthService from './components/authentication/AuthService';
+import withAuth from './components/authentication/withAuth';
+const Auth = new AuthService();
 
 class App extends Component {
 
   constructor(props) {
     super(props);
+    console.log(props)
+  }
+
+  handleLogout(){
+    Auth.logout();
+    this.props.history.replace('/login');     // pri klik na logout redirec na login
   }
 
   render() {
@@ -20,16 +29,21 @@ class App extends Component {
         <Router>
 
 
-          <Redirect from={'/'} to={'/login'}/>
+          <div>
+            <h2 className={"container-fluid p-3 my-3 bg-dark text-white"}>The lawsuits app of Posta</h2>
+
+            <button type="button" className="form-submit" onClick={this.handleLogout.bind(this)}>Logout</button>
+            <br/><br/>
+
+            <ul className={"nav nav-tabs"}>
+              <li className={"nav-item"}><Link to={"/home"} activeclassname={"nav-link active"}>Home</Link></li>
+              <li className={"nav-item"}><Link to={"/cases"} activeclassname={"nav-link"}>Cases</Link></li>
+            </ul>
+          </div>
+
+
 
           <div>
-
-            <div>
-
-              <Route path={"/login"} exact>
-                <LogIn/>
-              </Route>
-            </div>
 
 
 
@@ -44,35 +58,35 @@ class App extends Component {
 
             <div>
               <Route path={"/home"} exact>
-                <Header/>
+
                 <Home/>
               </Route>
             </div>
 
             <div>
               <Route path={"/cases"} exact>
-                <Header/>
+
                 <Cases/>
               </Route>
             </div>
 
             <div>
               <Route path={"/documents"} exact>
-                <Header/>
+
                 <Documents/>
               </Route>
             </div>
 
             <div>
               <Route path={"/employees"} exact>
-                <Header/>
+
                 <Employees/>
               </Route>
             </div>
 
             <div>
               <Route path={"/cases/add"} exact>
-                <Header/>
+
                 <AddCase/>
               </Route>
             </div>
@@ -85,5 +99,5 @@ class App extends Component {
 
 }
 
-export default App;
+export default withAuth(App);
 

@@ -15,7 +15,8 @@
     "jquery": "^3.4.1",
     "popper.js": "^1.16.0",
     "qs": "^6.9.1",
-    "bootstrap": "^4.4.1"
+    "bootstrap": "^4.4.1",
+    "jwt-decode": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
