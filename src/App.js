@@ -10,6 +10,9 @@ import Employees from "./components/employees/employees";
 import AddCase from "./components/cases/addCase";
 import AuthService from './components/authentication/AuthService';
 import withAuth from './components/authentication/withAuth';
+import AddEmployee from "./components/employees/addEmployee";
+import AddDocument from "./components/documents/addDocument";
+import EditCase from "./components/cases/editCase";
 const Auth = new AuthService();
 
 class App extends Component {
@@ -43,10 +46,10 @@ class App extends Component {
 
 
 
+
+          {/* todo: Different paths of the app*/}
+
           <div>
-
-
-
             {/*Mozebi ova ne ni treba, bidejki header go loadas vo sekoj dr endpoint, a ovoj endpoint ne se ni povikuva*/}
             <div>
               <Route  path={"/header"} exact>
@@ -54,43 +57,53 @@ class App extends Component {
               </Route>
             </div>
 
-
-
             <div>
               <Route path={"/home"} exact>
-
                 <Home/>
               </Route>
             </div>
 
             <div>
               <Route path={"/cases"} exact>
-
                 <Cases/>
               </Route>
             </div>
 
             <div>
               <Route path={"/documents"} exact>
-
                 <Documents/>
               </Route>
             </div>
 
             <div>
               <Route path={"/employees"} exact>
-
                 <Employees/>
               </Route>
             </div>
 
             <div>
               <Route path={"/cases/add"} exact>
-
                 <AddCase/>
               </Route>
             </div>
 
+            <div>
+              <Route path={"/cases/edit"} exact>
+                <EditCase/>
+              </Route>
+            </div>
+
+            <div>
+              <Route path={"/employees/add"} exact>
+                <AddEmployee/>
+              </Route>
+            </div>
+
+            <div>
+              <Route path={"/documents/add"} exact>
+                <AddDocument/>
+              </Route>
+            </div>
 
           </div>
         </Router>

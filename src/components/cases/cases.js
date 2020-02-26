@@ -47,17 +47,25 @@ class Cases extends Component{
                                 <Link to={"/employees"}>
                                     <button>All Employees</button>
                                 </Link>
+                                <Link to={"/employees/add"}>
+                                    <button>Add new employee</button>
+                                </Link>
                             </td>
                             <td>
                                 <Link to={"/documents"}>
                                     <button>All documents</button>
                                 </Link>
+                                <Link to={"/documents/add"}>
+                                    <button>Add document</button>
+                                </Link>
                             </td>
                             <td>At trial</td>
                             <td>
-                                <button>Edit</button>
+                                <Link to={"/cases/edit"}>
+                                    <button>Edit</button>
+                                </Link>
                                 <button>Delete</button>
-                                <button>Add document</button>
+
                             </td>
                         </tr>
                     </tbody>
