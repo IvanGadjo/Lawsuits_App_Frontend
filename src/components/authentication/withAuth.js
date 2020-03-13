@@ -26,6 +26,28 @@ export default function withAuth(AuthComponent) {
             }
         }
 
+        // componentDidMount() {
+        //     if(!Auth.loggedIn()){               // ako userot ne e logiran redirect na login
+        //         this.props.history.replace('/login')
+        //     }
+        //     else{           // ako e logiran probuvame da go zememe negoviot profil
+        //         try {
+        //             const profile = Auth.getProfile();  // dekodirame token i go stavame vo state
+        //             this.setState({
+        //                 user:profile
+        //             })
+        //         }
+        //         catch (err) {
+        //             Auth.logout();
+        //             this.props.history.replace('/login')
+        //         }
+        //     }
+        // }
+
+
+
+        // vaka bese porano napraveno, mislam deka raboti i so componentDidMount
+
         componentWillMount() {
             if(!Auth.loggedIn()){               // ako userot ne e logiran redirect na login
                 this.props.history.replace('/login')

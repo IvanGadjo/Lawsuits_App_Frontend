@@ -15,6 +15,7 @@ class LogIn extends React.Component{
 
     componentWillMount() {
         if (this.Auth.loggedIn()){
+            console.log(window.location.pathname);
             this.props.history.replace('/home');        // ako userot e vekje logiran togas odi na App component
         }
     }
@@ -29,7 +30,7 @@ class LogIn extends React.Component{
     handleFormSubmit(e){
         e.preventDefault();
 
-        debugger;
+        //debugger;
         console.log(this.state.username,this.state.password)
 
         this.Auth.login(this.state.username, this.state.password)   // ako userot e logiran go nosi na App component

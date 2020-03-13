@@ -3,7 +3,6 @@ import {BrowserRouter as Router, Link, Redirect, Route} from "react-router-dom";
 import './App.css';
 import Home from '../src/components/home'
 import Header from '../src/components/header'
-
 import Cases from "./components/cases/cases";
 import Documents from "./components/documents/documents";
 import Employees from "./components/employees/employees";
@@ -13,19 +12,46 @@ import withAuth from './components/authentication/withAuth';
 import AddEmployee from "./components/employees/addEmployee";
 import AddDocument from "./components/documents/addDocument";
 import EditCase from "./components/cases/editCase";
+import AllEmployees from "./components/employees/allEmployees";
+import employeeService from "./myAxios/axios_employeesService";
+
 const Auth = new AuthService();
+
+
 
 class App extends Component {
 
   constructor(props) {
     super(props);
-    console.log(props)
+    console.log(props);
+
+    this.state = {
+      employees : []
+    }
   }
 
   handleLogout(){
     Auth.logout();
     this.props.history.replace('/login');     // pri klik na logout redirec na login
   }
+
+  componentDidMount() {
+    this.loadAllEmployeesFromDB();
+  }
+
+  loadAllEmployeesFromDB = () =>{
+    employeeService.loadEmployees().then(resp =>{
+      console.log(resp.data);
+
+      this.setState( (prevState) => {
+        return {
+          employees: resp.data
+        }
+      })
+    });
+
+  };
+
 
   render() {
     return(
@@ -41,6 +67,7 @@ class App extends Component {
             <ul className={"nav nav-tabs"}>
               <li className={"nav-item"}><Link to={"/home"} activeclassname={"nav-link active"}>Home</Link></li>
               <li className={"nav-item"}><Link to={"/cases"} activeclassname={"nav-link"}>Cases</Link></li>
+              <li className={"nav-item"}><Link to={"/allEmployees"} activeclassname={"nav-link"}>All Employees</Link></li>
             </ul>
           </div>
 
@@ -102,6 +129,12 @@ class App extends Component {
             <div>
               <Route path={"/documents/add"} exact>
                 <AddDocument/>
+              </Route>
+            </div>
+
+            <div>
+              <Route path={"/allEmployees"} exact>
+                <AllEmployees employees={this.state.employees}/>
               </Route>
             </div>
 
