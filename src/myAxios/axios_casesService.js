@@ -1,13 +1,11 @@
-//import axios from './axios-config'
 import axios from 'axios'
 
-const employeeService = {
+const casesService = {
 
-    loadEmployees: () =>{
-
+    loadCases: ()=>{
         return axios({
             method: "get",
-            url: "http://localhost:8080/employees",
+            url: "http://localhost:8080/cases",
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Credentials":"true",
@@ -15,9 +13,9 @@ const employeeService = {
                 'Access-Control-Allow-Headers': 'Authorization',
                 'Content-Type': 'application/json',
                 'Authorization' : 'Bearer ' + localStorage.getItem("id_token")
-            },
+            }
         })
     }
 };
 
-export default employeeService;
+export default casesService;

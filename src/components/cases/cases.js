@@ -35,14 +35,17 @@ class Cases extends Component{
                     </thead>
                     <tbody>
 
+                    {this.props.cases.map((c,index)=>
                         <tr>
-                            <td>123</td>
-                            <td>case 1</td>
-                            <td>01.01.2020</td>
-                            <td>/</td>
-                            <td>30 000</td>
-                            <td>no</td>
-                            <td>/</td>
+
+                            <td>{c.caseNumber}</td>
+                            <td>{c.name}</td>
+                            <td>{c.createdAt}</td>
+                            <td>{c.basis}</td>
+                            <td>{c.value}</td>
+                            <td>{c.executed.toString()}</td>
+                            <td>{c.proxy}</td>
+
                             <td>
                                 <Link to={"/employees"}>
                                     <button>All Employees</button>
@@ -59,7 +62,7 @@ class Cases extends Component{
                                     <button>Add document</button>
                                 </Link>
                             </td>
-                            <td>At trial</td>
+                            <td>{c.phase}</td>
                             <td>
                                 <Link to={"/cases/edit"}>
                                     <button>Edit</button>
@@ -68,6 +71,7 @@ class Cases extends Component{
 
                             </td>
                         </tr>
+                    )}
                     </tbody>
                 </table>
             </div>

@@ -14,6 +14,7 @@ import AddDocument from "./components/documents/addDocument";
 import EditCase from "./components/cases/editCase";
 import AllEmployees from "./components/employees/allEmployees";
 import employeeService from "./myAxios/axios_employeesService";
+import casesService from "./myAxios/axios_casesService";
 
 const Auth = new AuthService();
 
@@ -26,7 +27,8 @@ class App extends Component {
     console.log(props);
 
     this.state = {
-      employees : []
+      employees : [],
+      cases: []
     }
   }
 
@@ -35,13 +37,16 @@ class App extends Component {
     this.props.history.replace('/login');     // pri klik na logout redirec na login
   }
 
+
+
   componentDidMount() {
     this.loadAllEmployeesFromDB();
+    this.loadAllCasesFromDB();
   }
 
   loadAllEmployeesFromDB = () =>{
     employeeService.loadEmployees().then(resp =>{
-      console.log(resp.data);
+      //console.log(resp.data);
 
       this.setState( (prevState) => {
         return {
@@ -50,6 +55,17 @@ class App extends Component {
       })
     });
 
+  };
+
+  loadAllCasesFromDB = () =>{
+    casesService.loadCases().then(resp =>{
+      console.log(resp.data);
+      this.setState((prevState) =>{
+        return{
+          cases: resp.data
+        }
+      })
+    })
   };
 
 
@@ -92,7 +108,7 @@ class App extends Component {
 
             <div>
               <Route path={"/cases"} exact>
-                <Cases/>
+                <Cases cases={this.state.cases}/>
               </Route>
             </div>
 
