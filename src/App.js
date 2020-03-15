@@ -119,9 +119,10 @@ class App extends Component {
             </div>
 
             <div>
-              <Route path={"/employees"} exact>
-                <Employees/>
-              </Route>
+              <Route path={"/employees/:caseId"} exact render={(props)=>{
+                console.log(props);
+                return <Employees theCaseId={props.match.params.caseId}/>
+              }}/>
             </div>
 
             <div>

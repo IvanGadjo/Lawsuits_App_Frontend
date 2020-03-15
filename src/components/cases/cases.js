@@ -47,9 +47,14 @@ class Cases extends Component{
                             <td>{c.proxy}</td>
 
                             <td>
-                                <Link to={"/employees"}>
+
+                                <Link to={{
+                                    pathname: "/employees/"+c.id,
+                                    caseId: c.id
+                                }}>
                                     <button>All Employees</button>
                                 </Link>
+
                                 <Link to={"/employees/add"}>
                                     <button>Add new employee</button>
                                 </Link>
