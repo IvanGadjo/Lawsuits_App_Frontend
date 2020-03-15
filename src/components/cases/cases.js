@@ -26,7 +26,7 @@ class Cases extends Component{
                                 <th>Value</th>
                                 <th>Is executed</th>
                                 <th>Proxy</th>
-                                <th>Employees</th>
+                                <th>Employees on <br/>this case</th>
                                 <th>Documents</th>
                                 <th>PHASE</th>
                                 <th>Actions</th>

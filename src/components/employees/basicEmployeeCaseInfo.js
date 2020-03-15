@@ -34,7 +34,7 @@ const BasicEmployeeCaseInfo = (props) =>{
 
     function casesRendering() {
         if(typeof employeeCases == "undefined")
-            return <td>Nisto brat</td>
+            return <td>Nisto - undefined</td>
         else
             return <td>{employeeCases.cases}</td>
     }

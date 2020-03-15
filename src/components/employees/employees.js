@@ -1,7 +1,16 @@
-import React from "react";
+import React,{useState,useEffect} from 'react';
 
 
-const employees = (props) =>{
+const Employees = (props) =>{
+
+    const [casesOfEmployee, setCases] = useState({
+       cases:[]
+    });
+
+    // useEffect({
+    //
+    // },[]);
+
 
     return(
         <div>
@@ -25,4 +34,4 @@ const employees = (props) =>{
     )
 };
 
-export default employees;
+export default Employees;
