@@ -59,7 +59,7 @@ class App extends Component {
 
   loadAllCasesFromDB = () =>{
     casesService.loadCases().then(resp =>{
-      console.log(resp.data);
+      //console.log(resp.data);
       this.setState((prevState) =>{
         return{
           cases: resp.data
@@ -120,7 +120,7 @@ class App extends Component {
 
             <div>
               <Route path={"/employees/:caseId"} exact render={(props)=>{
-                console.log(props);
+                //console.log(props);
                 return <Employees theCaseId={props.match.params.caseId}/>
               }}/>
             </div>

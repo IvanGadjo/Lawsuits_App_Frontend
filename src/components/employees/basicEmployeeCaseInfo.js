@@ -11,7 +11,7 @@ const BasicEmployeeCaseInfo = (props) =>{
 
     useEffect(()=>{
 
-        console.log(props.employeeId);
+        //console.log(props.employeeId);
 
         axios({
             method: "get",
@@ -25,19 +25,22 @@ const BasicEmployeeCaseInfo = (props) =>{
                 'Authorization' : 'Bearer ' + localStorage.getItem("id_token")
             },
         }).then(resp =>{
-            setEmployeeCases(resp.data);
+
+            let casesArray = [];
+            let i = 0;
+            resp.data.forEach((item)=>{
+                casesArray[i++] = item;
+            });
+
+            //setEmployeeCases(resp.data);
+            setEmployeeCases({
+                cases: casesArray
+            });
             console.log(props.employeeId,resp.data)
-            
         })
     },[props.employeeId]);
 
 
-    function casesRendering() {
-        if(typeof employeeCases == "undefined")
-            return <td>Nisto - undefined</td>
-        else
-            return <td>{employeeCases.cases}</td>
-    }
 
     return(
         <tr>
@@ -45,12 +48,11 @@ const BasicEmployeeCaseInfo = (props) =>{
             <td>{props.employeeLastName}</td>
             <td>{props.employeeId}</td>
 
-            {console.log(employeeCases.cases)}
-
-            {casesRendering()}
-            {/*{employeeCases.cases.map((c,index) =>*/}
-            {/*    <td key={index}>{c}</td>*/}
-            {/*)}*/}
+            <td>
+            {employeeCases.cases.map((ec,kluc)=>
+                <h6 key={kluc}>{ec}</h6>
+            )}
+            </td>
         </tr>
     )
 };

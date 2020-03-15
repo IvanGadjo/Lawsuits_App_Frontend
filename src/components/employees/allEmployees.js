@@ -9,6 +9,12 @@ const AllEmployees = (props) =>{
     return(
         <div>
             <table id='cases-table'>
+                <thead>
+                    <td>First name:</td>
+                    <td>Last name:</td>
+                    <td>(Employee id:)</td>
+                    <td>Working on:</td>
+                </thead>
                 <tbody>
                     {props.employees.map((e,index) =>
                         <BasicEmployeeCaseInfo employeeFirstName={e.firstName}
