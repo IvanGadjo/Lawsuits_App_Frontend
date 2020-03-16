@@ -12,3 +12,6 @@ const instance = axios.create({
 
 
 export default instance;
+
+
+// fixme: Ne se koristi nigde ova

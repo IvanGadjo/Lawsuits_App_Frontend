@@ -36,7 +36,7 @@ class Cases extends Component{
                     <tbody>
 
                     {this.props.cases.map((c,index)=>
-                        <tr>
+                        <tr key={index}>
 
                             <td>{c.caseNumber}</td>
                             <td>{c.name}</td>
@@ -60,9 +60,13 @@ class Cases extends Component{
                                 </Link>
                             </td>
                             <td>
-                                <Link to={"/documents"}>
+                                <Link to={{
+                                    pathname: "/documents/"+c.id,
+                                    caseId: c.id
+                                }}>
                                     <button>All documents</button>
                                 </Link>
+
                                 <Link to={"/documents/add"}>
                                     <button>Add document</button>
                                 </Link>

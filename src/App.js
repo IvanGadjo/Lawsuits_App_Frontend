@@ -113,9 +113,11 @@ class App extends Component {
             </div>
 
             <div>
-              <Route path={"/documents"} exact>
-                <Documents/>
-              </Route>
+              <Route path={"/documents/:caseId"} exact render={(props)=>{
+                return <Documents theCaseId={props.match.params.caseId}/>
+              }}/>
+
+
             </div>
 
             <div>

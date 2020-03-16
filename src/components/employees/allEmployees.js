@@ -1,5 +1,4 @@
-import React,{useState,useEffect} from "react";
-import axios from 'axios'
+import React from "react";
 import BasicEmployeeCaseInfo from "./basicEmployeeCaseInfo";
 
 
@@ -10,10 +9,10 @@ const AllEmployees = (props) =>{
         <div>
             <table id='cases-table'>
                 <thead>
-                    <td>First name:</td>
-                    <td>Last name:</td>
-                    <td>(Employee id:)</td>
-                    <td>Working on:</td>
+                    <th>First name:</th>
+                    <th>Last name:</th>
+                    <th>(Employee id:)</th>
+                    <th>Working on:</th>
                 </thead>
                 <tbody>
                     {props.employees.map((e,index) =>
