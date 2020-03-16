@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from "react";
 import axios from 'axios'
-import {Link} from "react-router-dom";
 
 
 
@@ -58,7 +57,11 @@ const Documents = (props) =>{
             }
         }).then(resp =>{
 
-            console.log(resp.data.blob())
+            console.log(resp);
+
+            // fixme: sega za sega raboti samo so txt fajlovi
+            var fileDownload = require('js-file-download');
+            fileDownload(resp.data, 'myfile.txt');
 
             // resp.data.blob().then(blob => {
             //     let url = window.URL.createObjectURL(blob);

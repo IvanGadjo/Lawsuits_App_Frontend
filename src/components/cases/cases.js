@@ -1,11 +1,44 @@
-import React,{Component} from "react";
+import React, {Component} from "react";
 import {Link} from "react-router-dom";
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+import axios from 'axios'
 
+//  fixme: moze onSelect da pali nov screen so component CaseDetails kaj so ke ima detali za childCase
 
 class Cases extends Component{
 
+    defaultOption = "cc";
+
+
+
+    onSelect = (e) =>{
+
+        let selectedCase = this.props.cases.filter(c =>{
+            return c.name == e.value
+        });
+
+        console.log(selectedCase)
+    };
+
+    loadChildCasesNames = (parentCaseId) =>{
+        let menuOptions = [];
+
+        this.props.cases.filter(c =>{
+            if (c.parentCase != null && parentCaseId == c.parentCase.id){
+                menuOptions.push(c.name)
+            }
+        });
+
+        //console.log(menuOptions);
+
+        return menuOptions;
+    };
+
+
 
     render() {
+        console.log(this.props.cases);
 
         return (
             <div>
@@ -33,9 +66,14 @@ class Cases extends Component{
 
                         </tr>
                     </thead>
+
                     <tbody>
 
-                    {this.props.cases.map((c,index)=>
+                    {this.props.cases.filter((c)=>{
+                        return c.parentCase == null;            // ova za da renderne na pocetok samo lista od parent cases
+                                                                // pa od dropdown-ot se biraat child cases
+                    }).map((c,index)=>
+
                         <tr key={index}>
 
                             <td>{c.caseNumber}</td>
@@ -76,12 +114,18 @@ class Cases extends Component{
                                 <Link to={"/cases/edit"}>
                                     <button>Edit</button>
                                 </Link>
+
                                 <button>Delete</button>
 
+                                <Dropdown options={this.loadChildCasesNames(c.id)} onChange={this.onSelect} value={this.defaultOption} placeholder="Child cases" />
                             </td>
+
                         </tr>
+
                     )}
+
                     </tbody>
+
                 </table>
             </div>
         );
