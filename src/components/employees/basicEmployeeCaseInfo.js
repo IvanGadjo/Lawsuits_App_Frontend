@@ -36,7 +36,7 @@ const BasicEmployeeCaseInfo = (props) =>{
             setEmployeeCases({
                 cases: casesArray
             });
-            console.log(props.employeeId,resp.data)
+            //console.log(props.employeeId,resp.data)
         })
     },[props.employeeId]);
 

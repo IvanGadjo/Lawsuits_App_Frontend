@@ -9,10 +9,12 @@ const AllEmployees = (props) =>{
         <div>
             <table id='cases-table'>
                 <thead>
-                    <th>First name:</th>
-                    <th>Last name:</th>
-                    <th>(Employee id:)</th>
-                    <th>Working on:</th>
+                    <tr>
+                        <th>First name:</th>
+                        <th>Last name:</th>
+                        <th>(Employee id:)</th>
+                        <th>Working on:</th>
+                    </tr>
                 </thead>
                 <tbody>
                     {props.employees.map((e,index) =>

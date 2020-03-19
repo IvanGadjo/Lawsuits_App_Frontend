@@ -28,20 +28,38 @@ class App extends Component {
 
     this.state = {
       employees : [],
-      cases: []
+      cases: [],
+      loggedInEmployee: {}
     }
   }
+
+  componentDidMount() {
+    this.loadAllEmployeesFromDB();
+    this.loadAllCasesFromDB();
+  }
+
+
 
   handleLogout(){
     Auth.logout();
     this.props.history.replace('/login');     // pri klik na logout redirec na login
   }
 
+  setLoggedInEmployeeInfoToState(){
+    let usrnm = this.props.user.sub;
+    let res = {};
 
+    this.state.employees.forEach(e =>{
+      let empusrnm = e.username;
+      //console.log(empusrnm);
+      if(empusrnm === usrnm) {
+        res = e;
+      }
+    });
 
-  componentDidMount() {
-    this.loadAllEmployeesFromDB();
-    this.loadAllCasesFromDB();
+    this.setState({
+      loggedInEmployee: res
+    })
   }
 
   loadAllEmployeesFromDB = () =>{
@@ -52,8 +70,11 @@ class App extends Component {
         return {
           employees: resp.data
         }
-      })
+      });
+
+      this.setLoggedInEmployeeInfoToState();
     });
+
 
   };
 
@@ -102,7 +123,7 @@ class App extends Component {
 
             <div>
               <Route path={"/home"} exact>
-                <Home/>
+                <Home employee={this.state.loggedInEmployee}/>
               </Route>
             </div>
 

@@ -7,7 +7,7 @@ import CaseDetails from "./caseDetails";
 class Cases extends Component{
 
     render() {
-        console.log(this.props.cases);
+        //console.log(this.props.cases);
 
         return (
             <div>

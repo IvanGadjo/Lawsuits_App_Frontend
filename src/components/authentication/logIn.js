@@ -31,7 +31,7 @@ class LogIn extends React.Component{
         e.preventDefault();
 
         //debugger;
-        console.log(this.state.username,this.state.password)
+        //console.log(this.state.username,this.state.password)
 
         this.Auth.login(this.state.username, this.state.password)   // ako userot e logiran go nosi na App component
             .then(res => {
