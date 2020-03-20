@@ -28,6 +28,8 @@ class Cases extends Component{
                                 <th>Value</th>
                                 <th>Is executed</th>
                                 <th>Proxy</th>
+                                <th>Plaintiff</th>
+                                <th>Sued</th>
                                 <th>Employees on <br/>this case</th>
                                 <th>Documents</th>
                                 <th>PHASE</th>
@@ -39,8 +41,9 @@ class Cases extends Component{
 
                     {this.props.cases.filter((c)=>{
                         return c.parentCase == null;
+                        //return true;
                     }).map((c,kluc)=>
-                        <CaseDetails allCases={this.props.cases} thisCase={c} key={kluc}/>
+                        <CaseDetails allCases={this.props.cases} parentCase={c} key={kluc}/>
                     )}
 
 

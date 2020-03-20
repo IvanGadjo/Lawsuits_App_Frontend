@@ -90,7 +90,7 @@ class App extends Component {
   };
 
 
-  render() {
+  render() {console.log(this.props)
     return(
         <Router>
 

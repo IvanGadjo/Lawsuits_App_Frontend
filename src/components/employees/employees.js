@@ -64,7 +64,11 @@ const Employees = (props) =>{
 
     },[]);
 
-    console.log(employeesOfCase);   // ednas gi dava defaultnite, ednas gi dava procitanite
+
+
+
+
+    //console.log(employeesOfCase);   // ednas gi dava defaultnite, ednas gi dava procitanite
 
     return (
         <div>
