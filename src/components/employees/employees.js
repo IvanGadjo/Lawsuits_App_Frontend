@@ -2,6 +2,8 @@ import React,{useState,useEffect} from 'react';
 import axios from 'axios'
 
 
+// props: theCaseId
+
 const Employees = (props) =>{
 
     const [employeesOfCase, setEmployees] = useState({

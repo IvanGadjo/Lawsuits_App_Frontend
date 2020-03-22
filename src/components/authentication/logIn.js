@@ -14,6 +14,7 @@ class LogIn extends React.Component{
     }
 
     componentWillMount() {
+        //debugger;
         if (this.Auth.loggedIn()){
             console.log(window.location.pathname);
             this.props.history.replace('/home');        // ako userot e vekje logiran togas odi na App component

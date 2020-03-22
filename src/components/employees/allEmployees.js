@@ -2,6 +2,8 @@ import React from "react";
 import BasicEmployeeCaseInfo from "./basicEmployeeCaseInfo";
 
 
+// props: employees
+
 const AllEmployees = (props) =>{
 
 

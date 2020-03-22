@@ -1,6 +1,8 @@
 import React  from "react";
 
 
+//propsL employee
+
 
 const home = (props) =>{
 

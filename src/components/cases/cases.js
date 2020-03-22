@@ -1,13 +1,15 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
-import CaseDetails from "./caseDetails";
+import CaseDetails from "./details/caseDetails";
 
-//  fixme: moze onSelect da pali nov screen so component CaseDetails kaj so ke ima detali za childCase
+
+//props: cases
+
 
 class Cases extends Component{
 
     render() {
-        //console.log(this.props.cases);
+        console.log(this.props);
 
         return (
             <div>
@@ -41,7 +43,6 @@ class Cases extends Component{
 
                     {this.props.cases.filter((c)=>{
                         return c.parentCase == null;
-                        //return true;
                     }).map((c,kluc)=>
                         <CaseDetails allCases={this.props.cases} parentCase={c} key={kluc}/>
                     )}
