@@ -40,7 +40,7 @@ class AddLawsuitEntity extends Component{
 
         this.props.onAddLawsuitEntity(newLawsuitEntity);
 
-        this.props.history.push("/cases/add");
+        this.props.history.push("/cases");
 
         // axios.post("http://localhost:8080/lawsuit-entities",null,{
         //     headers: {

@@ -17,6 +17,7 @@ import employeeService from "./myAxios/axios_employeesService";
 import casesService from "./myAxios/axios_casesService";
 import AddLawsuitEntity from "./components/lawsuitEntities/addLawsuitEntity";
 import lawsuitEntitiesService from "./myAxios/axios_lawsuitEntitiesService";
+import AllLawsuitEntities from "./components/lawsuitEntities/allLawsuitEntities";
 
 const Auth = new AuthService();
 
@@ -128,6 +129,18 @@ class App extends Component {
     })
   };
 
+  addEmployeesToCase = (employeesToAdd, caseId) =>{
+    casesService.addEmployeesToCase(employeesToAdd,caseId);
+  };
+
+  editCase = (editedCase, oldId) =>{
+    casesService.editCase(editedCase,oldId).then(resp =>{
+      this.setState({
+        cases: [...this.state.cases,resp.data]
+      })
+    })
+  };
+
 
 
   render() {
@@ -145,6 +158,7 @@ class App extends Component {
               <li className={"nav-item"}><Link to={"/home"} activeclassname={"nav-link active"}>Home</Link></li>
               <li className={"nav-item"}><Link to={"/cases"} activeclassname={"nav-link"}>Cases</Link></li>
               <li className={"nav-item"}><Link to={"/allEmployees"} activeclassname={"nav-link"}>All Employees</Link></li>
+              <li className={"nav-item"}><Link to={"/allLawsuitEntities"}>All lawsuit entities</Link></li>
             </ul>
           </div>
 
@@ -187,13 +201,25 @@ class App extends Component {
             </div>
 
             <div>
-              <Route path={"/cases/edit"} exact>
-                <EditCase/>
+              <Route path={"/cases/edit/:caseId"} exact render={(props)=>{
+                return <EditCase theCase={props.location.theCase}
+                                 lawsuitEntities={this.state.lawsuitEntities}
+                                 loggedInEmployee={this.state.loggedInEmployee}
+                                 onEditCase={this.editCase}/>
+              }}>
+
               </Route>
             </div>
 
 
             {/*LAWSUIT ENTITIES*/}
+
+            <div>
+              <Route path={"/allLawusitEntities"} exact>
+                <AllLawsuitEntities/>
+              </Route>
+            </div>
+
             <div>
               <Route path={"/lawsuitEntities/add"} exact>
                 <AddLawsuitEntity onAddLawsuitEntity={this.addNewLawsuitEntityToDB}/>
@@ -227,8 +253,12 @@ class App extends Component {
             </div>
 
             <div>
-              <Route path={"/employees/add"} exact>
-                <AddEmployee/>
+              <Route path={"/employees/add/:caseId"} exact render={(props)=>{
+                return <AddEmployee theCaseId={props.match.params.caseId}
+                                    employees={this.state.employees}
+                                    onAddNewEmployeesToCase={this.addEmployeesToCase}/>
+              }}>
+
               </Route>
             </div>
 

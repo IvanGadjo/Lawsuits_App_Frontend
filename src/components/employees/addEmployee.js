@@ -1,27 +1,57 @@
 import React,{Component} from "react";
+import EmployeeCheckboxes from "./employeesCheckboxes";
+import {Link} from "react-router-dom";
+import {withRouter} from 'react-router-dom';
 
-// treba da bide stateful poradi toa sto ke ima form validation
+// props: theCaseId, employees, addEmployeesToCase()
 
 class AddEmployee extends Component {
+
+
+    constructor() {
+        super();
+
+        this.state={
+            employeesToBeAdded: []
+        }
+    }
+
+
+    // callback for employeesCheckboxes component, adds emp ids to state
+    selectedEmployeesChange = (selectedEmployees) =>{
+        this.setState({
+            employeesToBeAdded: selectedEmployees
+        })
+    };
+
+    onFormSubmit = (e) =>{
+        e.preventDefault();
+
+        //console.log(this.state.employeesToBeAdded);
+
+        this.props.onAddNewEmployeesToCase(this.state.employeesToBeAdded,this.props.theCaseId);
+
+        this.props.history.push("/cases")
+    };
 
 
     render() {
         return(
           <div>
-              <form>
-
+              <form onSubmit={this.onFormSubmit} noValidate>
                   <br/><br/>
-                  <h4>Add new employee</h4>
-
-                  <label htmlFor={'first_name'}>First name:</label>
-                  <input type='text' name={'first_name'}/>
-                  <label htmlFor={'last_name'}>Last name:</label>
-                  <input type='text' name={'last_name'}/>
-
+                  <EmployeeCheckboxes allEmployees={this.props.employees}
+                                      onSelectedEmployeesChange={this.selectedEmployeesChange}/>
                   <br/><br/>
-                  <button type={'submit'}>Add new user</button>
-                  <button>Cancel</button>
-                  <button type={'reset'}>Reset</button>
+
+
+                  <div>
+                      <button type="submit">Save</button>
+                      <Link to={"/cases"}>
+                          <button>Cancel</button>
+                      </Link>
+                      <button type="reset">Reset</button>
+                  </div>
               </form>
           </div>
         );
@@ -29,4 +59,4 @@ class AddEmployee extends Component {
 
 }
 
-export default AddEmployee;
+export default withRouter(AddEmployee);

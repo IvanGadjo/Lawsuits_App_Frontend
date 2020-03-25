@@ -222,7 +222,10 @@ const CaseDetails = (props) =>{
                         <button>All Employees</button>
                     </Link>
 
-                    <Link to={"/employees/add"}>
+                    <Link to={{
+                        pathname: "/employees/add/"+ props.parentCase.id,
+                        caseId: props.parentCase.id
+                    }}>
                         <button>Add new employee</button>
                     </Link>
                 </td>
@@ -243,7 +246,10 @@ const CaseDetails = (props) =>{
                 </td>
                 <td>{props.parentCase.phase}</td>
                 <td>
-                    <Link to={"/cases/edit"}>
+                    <Link to={{
+                        pathname: "/cases/edit/"+props.parentCase.id,
+                        theCase: props.parentCase,
+                    }}>
                         <button>Edit</button>
                     </Link>
 

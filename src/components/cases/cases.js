@@ -9,7 +9,7 @@ import CaseDetails from "./details/caseDetails";
 class Cases extends Component{
 
     render() {
-        console.log(this.props);
+        //console.log(this.props);
 
         return (
             <div>

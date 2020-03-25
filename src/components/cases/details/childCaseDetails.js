@@ -91,7 +91,10 @@ const ChildCaseDetails = (props) =>{
                         <button>All Employees</button>
                     </Link>
 
-                    <Link to={"/employees/add"}>
+                    <Link to={{
+                        pathname: "/employees/add/"+props.childCase.id,
+                        caseId: props.childCase.id
+                    }}>
                         <button>Add new employee</button>
                     </Link>
                 </td>
@@ -103,7 +106,10 @@ const ChildCaseDetails = (props) =>{
                         <button>All documents</button>
                     </Link>
 
-                    <Link to={"/documents/add"}>
+                    <Link to={{
+                        pathname: "/documents/add"+props.childCase.id,
+                        caseId: props.childCase.id
+                    }}>
                         <button>Add document</button>
                     </Link>
                 </td>
@@ -124,7 +130,7 @@ const ChildCaseDetails = (props) =>{
     };
 
 
-    console.log(props.childCase.name,"---",childCasePlaintiff.name)
+    //console.log(props.childCase.name,"---",childCasePlaintiff.name)
 
 
     return(

@@ -1,12 +1,12 @@
 import React,{Component} from "react";
 import {Link} from "react-router-dom";
 import {withRouter} from 'react-router-dom';
-import EmployeeCheckboxes from "./employeesCheckboxes";
+import EmployeeCheckboxes from "../employees/employeesCheckboxes";
 import Dropdown from 'react-dropdown';
 //import 'react-dropdown/style.css';
 
 
-// props: employees, cases, lawsuitEntities, onAddNewCase
+// props: employees, cases, lawsuitEntities, onAddNewCase, loggedInEmployee
 
 
 class AddCase extends Component {
@@ -182,10 +182,10 @@ class AddCase extends Component {
                         <input type="text" name={"case_name"} id="case_name_id" placeholder=""/>
                     </div>
 
-                    <label htmlFor="case_createdAt">Input date:</label>
-                    <div>
-                        <input type="date" name={"case_createdAt"} id="case_num_id" placeholder=""/>
-                    </div>
+                    {/*<label htmlFor="case_createdAt">Input date:</label>*/}
+                    {/*<div>*/}
+                    {/*    <input type="date" name={"case_createdAt"} id="case_num_id" placeholder=""/>*/}
+                    {/*</div>*/}
 
                     <label htmlFor="case_basis">Basis:</label>
                     <div>

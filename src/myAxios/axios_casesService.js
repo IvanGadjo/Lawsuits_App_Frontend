@@ -45,6 +45,31 @@ const casesService = {
        })
     },
 
+    editCase: (editedCase, oldCaseId) =>{
+        return axios.put("http://localhost:8080/cases/"+oldCaseId, null,{
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Credentials":"true",
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+                'Access-Control-Allow-Headers': 'Authorization',
+                'Content-Type': 'application/json',
+                'Authorization' : 'Bearer ' + localStorage.getItem("id_token")
+            },
+            params:{
+                "caseNumber": editedCase.caseNumber,
+                "name": editedCase.name,
+                "basis": editedCase.basis,
+                "value": editedCase.value,
+                "phase": editedCase.phase,
+                "isExecuted": editedCase.isExecuted,
+                "plaintiffId": editedCase.plaintiffId,
+                "suedId": editedCase.suedId,
+                "createdBy": editedCase.createdBy,
+                "proxy": editedCase.proxy
+            }
+        })
+    },
+
     addEmployeesToCase: (employees,caseId) =>{
 
         debugger;
