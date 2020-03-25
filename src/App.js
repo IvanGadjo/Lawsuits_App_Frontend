@@ -66,6 +66,8 @@ class App extends Component {
     })
   }
 
+
+  // Functions for loading stuff from DB directly on start:
   loadAllEmployeesFromDB = () =>{
     employeeService.loadEmployees().then(resp =>{
       //console.log(resp.data);
@@ -102,6 +104,31 @@ class App extends Component {
       })
     })
   };
+
+
+
+  // Function for form submitting
+  addNewLawsuitEntityToDB = (newLawsuitEntity) =>{
+    lawsuitEntitiesService.addNewLawsuitEntity(newLawsuitEntity).then(resp =>{
+
+      this.setState({
+        lawsuitEntities: [...this.state.lawsuitEntities,resp.data]
+      });
+    })
+  };
+
+  addNewCaseToDB = (newCase) =>{
+    casesService.addNewCase(newCase).then(resp =>{
+
+      casesService.addEmployeesToCase(newCase.employeesToAdd, resp.data.id);
+
+      this.setState({
+        cases: [...this.state.cases,resp.data]
+      })
+    })
+  };
+
+
 
   render() {
     return(
@@ -151,7 +178,11 @@ class App extends Component {
 
             <div>
               <Route path={"/cases/add"} exact>
-                <AddCase employees={this.state.employees} lawsuitEntities={this.state.lawsuitEntities}/>
+                <AddCase employees={this.state.employees}
+                         lawsuitEntities={this.state.lawsuitEntities}
+                         onAddNewCase={this.addNewCaseToDB}
+                         cases={this.state.cases}
+                         loggedInEmployee={this.state.loggedInEmployee}/>
               </Route>
             </div>
 
@@ -165,7 +196,7 @@ class App extends Component {
             {/*LAWSUIT ENTITIES*/}
             <div>
               <Route path={"/lawsuitEntities/add"} exact>
-                <AddLawsuitEntity/>
+                <AddLawsuitEntity onAddLawsuitEntity={this.addNewLawsuitEntityToDB}/>
               </Route>
             </div>
 

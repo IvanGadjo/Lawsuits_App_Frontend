@@ -1,4 +1,5 @@
 import axios from 'axios'
+import qs from 'qs'
 
 const casesService = {
 
@@ -13,6 +14,57 @@ const casesService = {
                 'Access-Control-Allow-Headers': 'Authorization',
                 'Content-Type': 'application/json',
                 'Authorization' : 'Bearer ' + localStorage.getItem("id_token")
+            }
+        })
+    },
+
+    addNewCase: (newCase) => {
+
+       return axios.post("http://localhost:8080/cases",null,{
+           headers: {
+               "Access-Control-Allow-Origin": "*",
+               "Access-Control-Allow-Credentials":"true",
+               'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+               'Access-Control-Allow-Headers': 'Authorization',
+               'Content-Type': 'application/json',
+               'Authorization' : 'Bearer ' + localStorage.getItem("id_token")
+           },
+           params:{
+                "caseNumber": newCase.caseNumber,
+                "name": newCase.name,
+                "basis": newCase.basis,
+                "value": newCase.value,
+                "phase": newCase.phase,
+                "isExecuted": newCase.isExecuted,
+                "parentCaseId": newCase.parentCaseId,
+                "plaintiffId": newCase.plaintiffId,
+                "suedId": newCase.suedId,
+                "createdBy": newCase.createdBy,
+                "proxy": newCase.proxy
+           }
+       })
+    },
+
+    addEmployeesToCase: (employees,caseId) =>{
+
+        debugger;
+        console.log(employees);
+
+        const employeesString = employees.reduce((totalStr,emp)=>{
+            return totalStr+","+emp;
+        });
+
+        axios.post("http://localhost:8080/cases/addEmployees/" + caseId, null, {
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Credentials": "true",
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+                'Access-Control-Allow-Headers': 'Authorization',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("id_token")
+            },
+            params: {
+                "employeeIds": employeesString
             }
         })
     }

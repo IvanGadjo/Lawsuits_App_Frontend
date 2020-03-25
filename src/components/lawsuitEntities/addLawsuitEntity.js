@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
+import {withRouter} from 'react-router-dom';
 import axios from 'axios';
 
-
+// props: onAddLawsuitEntity
 
 
 class AddLawsuitEntity extends Component{
@@ -29,30 +30,34 @@ class AddLawsuitEntity extends Component{
             person = false;
         }
 
-        // const newLawsuitEntity = {
-        //     "name": formData.target.lawsuitEntity_name.value,
-        //     "emb": formData.target.lawsuitEntity_emb.value,
-        //     "isCompany": person
-        // };
-        //
-        // console.log(newLawsuitEntity)
+        const newLawsuitEntity = {
+            "name": formData.target.lawsuitEntity_name.value,
+            "emb": formData.target.lawsuitEntity_emb.value,
+            "isCompany": person
+        };
 
+        //console.log(newLawsuitEntity)
 
-        axios.post("http://localhost:8080/lawsuit-entities",null,{
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Credentials":"true",
-                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-                'Access-Control-Allow-Headers': 'Authorization',
-                'Content-Type': 'application/json',
-                'Authorization' : 'Bearer ' + localStorage.getItem("id_token")
-            },
-            params:{
-                "name": formData.target.lawsuitEntity_name.value,
-                "emb": formData.target.lawsuitEntity_emb.value,
-                "isCompany": person
-            }
-        })
+        this.props.onAddLawsuitEntity(newLawsuitEntity);
+
+        this.props.history.push("/cases/add");
+
+        // axios.post("http://localhost:8080/lawsuit-entities",null,{
+        //     headers: {
+        //         "Access-Control-Allow-Origin": "*",
+        //         "Access-Control-Allow-Credentials":"true",
+        //         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+        //         'Access-Control-Allow-Headers': 'Authorization',
+        //         'Content-Type': 'application/json',
+        //         'Authorization' : 'Bearer ' + localStorage.getItem("id_token")
+        //     },
+        //     params:{
+        //         "name": formData.target.lawsuitEntity_name.value,
+        //         "emb": formData.target.lawsuitEntity_emb.value,
+        //         "isCompany": person
+        //     }
+        // })
+
 
 
     };
@@ -114,4 +119,4 @@ class AddLawsuitEntity extends Component{
 }
 
 
-export default AddLawsuitEntity;
+export default withRouter(AddLawsuitEntity);
