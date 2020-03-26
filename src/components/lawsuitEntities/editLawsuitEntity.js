@@ -1,20 +1,25 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import {withRouter} from 'react-router-dom';
-import axios from 'axios';
-
-// props: onAddLawsuitEntity, redirectPath
 
 
-class AddLawsuitEntity extends Component{
+// props: onEditLawsuitEntity, theLawsuitEntity
+
+
+class EditLawsuitEntity extends Component{
 
     constructor(props) {
         super(props);
-        this.state = {
-            selectedOption: "option1"
+
+        let option = "option1";
+        if (this.props.theLawsuitEntity.company){
+            option = "option2"
         }
 
-        //console.log(this.props.redirectPath)
+        this.state = {
+            selectedOption: option
+        }
+
     }
 
     handleOptionChange = (e) =>{
@@ -32,51 +37,34 @@ class AddLawsuitEntity extends Component{
             person = false;
         }
 
-        const newLawsuitEntity = {
+        const editedLawsuitEntity = {
             "name": formData.target.lawsuitEntity_name.value,
             "emb": formData.target.lawsuitEntity_emb.value,
             "isCompany": person
         };
 
-        //console.log(newLawsuitEntity)
+        //console.log(editedLawsuitEntity)
 
-        this.props.onAddLawsuitEntity(newLawsuitEntity);
+        this.props.onEditLawsuitEntity(editedLawsuitEntity,this.props.theLawsuitEntity.id);
 
-        this.props.history.push(this.props.redirectPath);
-
-        // axios.post("http://localhost:8080/lawsuit-entities",null,{
-        //     headers: {
-        //         "Access-Control-Allow-Origin": "*",
-        //         "Access-Control-Allow-Credentials":"true",
-        //         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-        //         'Access-Control-Allow-Headers': 'Authorization',
-        //         'Content-Type': 'application/json',
-        //         'Authorization' : 'Bearer ' + localStorage.getItem("id_token")
-        //     },
-        //     params:{
-        //         "name": formData.target.lawsuitEntity_name.value,
-        //         "emb": formData.target.lawsuitEntity_emb.value,
-        //         "isCompany": person
-        //     }
-        // })
-
-
+         this.props.history.push("/allLawsuitEntities");
 
     };
 
     render() {
         return(
             <div>
-                <h3>Add a new lawsuit entity</h3>
+                <h3>Edit the {this.props.theLawsuitEntity.name} lawsuit entity</h3>
+
                 <form onSubmit={this.onFormSubmit} noValidate>
                     <label htmlFor={"lawsuitEntity_name"}>Name:</label>
                     <br/>
-                    <input type={"text"} id={"lawsuitEntity_name"} placeholder={"name"}/>
+                    <input type={"text"} id={"lawsuitEntity_name"} defaultValue={this.props.theLawsuitEntity.name}/>
                     <br/><br/>
 
                     <label htmlFor={"lawsuitEntity_emb"}>EMBG/EMBS:</label>
                     <br/>
-                    <input type={"text"} id={"lawsuitEntity_emb"} placeholder={"embg/embs"}/>
+                    <input type={"text"} id={"lawsuitEntity_emb"} defaultValue={this.props.theLawsuitEntity.emb}/>
                     <br/><br/>
 
                     <label>Is the lawsuit entity a person or a company?</label>
@@ -108,17 +96,17 @@ class AddLawsuitEntity extends Component{
 
                         <button type="reset">Reset</button>
 
-                        <Link to={this.props.redirectPath}>
+                        <Link to={"/allLawsuitEntities"}>
                             <button>Cancel</button>
                         </Link>
                     </div>
+
+                    <br/>
 
                 </form>
             </div>
         )
     }
-
 }
 
-
-export default withRouter(AddLawsuitEntity);
+export default withRouter(EditLawsuitEntity);

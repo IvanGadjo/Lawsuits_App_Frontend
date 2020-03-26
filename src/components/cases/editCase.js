@@ -99,27 +99,27 @@ class EditCase extends Component {
 
                     <label htmlFor="case_num">Case number:</label>
                     <div>
-                        <input type="text" name={"case_num"} id="case_num_id" placeholder=""/>
+                        <input type="text" name={"case_num"} id="case_num_id" defaultValue={this.props.theCase.caseNumber}/>
                     </div>
 
                     <label htmlFor="case_name">Case name:</label>
                     <div>
-                        <input type="text" name={"case_name"} id="case_name_id" placeholder=""/>
+                        <input type="text" name={"case_name"} id="case_name_id" defaultValue={this.props.theCase.name}/>
                     </div>
 
                     <label htmlFor="case_basis">Basis:</label>
                     <div>
-                        <textarea name={"case_basis"} id="case_basis_id" placeholder=""/>
+                        <textarea name={"case_basis"} id="case_basis_id" defaultValue={this.props.theCase.basis}/>
                     </div>
 
                     <label htmlFor="case_val">Value of case:</label>
                     <div>
-                        <input type="text" name={"case_val"} id="case_val_id" placeholder=""/>
+                        <input type="text" name={"case_val"} id="case_val_id" defaultValue={this.props.theCase.value}/>
                     </div>
 
                     <label htmlFor="case_phase">Phase:</label>
                     <div>
-                        <input type="text" name={"case_phase"} id="case_phase_id" placeholder=""/>
+                        <input type="text" name={"case_phase"} id="case_phase_id" defaultValue={this.props.theCase.phase}/>
                     </div>
 
                     <label htmlFor="case_executed">Is the case executed:</label>
@@ -159,7 +159,7 @@ class EditCase extends Component {
 
                     <label htmlFor="case_proxy">Change proxy:</label>
                     <div>
-                        <input type="text" name={"case_proxy"} id="case_proxy_id" placeholder=""/>
+                        <input type="text" name={"case_proxy"} id="case_proxy_id" defaultValue={this.props.theCase.proxy}/>
                     </div>
 
                     <br/>

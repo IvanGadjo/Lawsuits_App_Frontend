@@ -116,7 +116,10 @@ const ChildCaseDetails = (props) =>{
                 <td>{props.childCase.phase}</td>
 
                 <td>
-                    <Link to={"/cases/edit"}>
+                    <Link to={{
+                        pathname: "/cases/edit/"+props.childCase.id,
+                        theCase: props.childCase
+                    }}>
                         <button>Edit</button>
                     </Link>
 

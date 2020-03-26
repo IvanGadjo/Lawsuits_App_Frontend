@@ -230,7 +230,10 @@ class AddCase extends Component {
                                   placeholder={"plaintiffs"}
                                   id={"case_plaintiff"}
                         />
-                        <Link to={"/lawsuitEntities/add"}>
+                        <Link to={{
+                            pathname: "/lawsuitEntities/add",
+                            redirectPath: "/cases/add"
+                        }}>
                             <button>Add new plaintiff</button><br/>
                         </Link>
                     </div>
@@ -245,7 +248,10 @@ class AddCase extends Component {
                                   placeholder={""}
                                   id={"case_sued"}
                         />
-                        <Link to={"/lawsuitEntities/add"}>
+                        <Link to={{
+                            pathname: "/lawsuitEntities/add",
+                            redirectPath: "/cases/add"
+                        }}>
                             <button>Add new sued</button>
                         </Link>
                     </div>

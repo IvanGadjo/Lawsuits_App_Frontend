@@ -18,6 +18,7 @@ import casesService from "./myAxios/axios_casesService";
 import AddLawsuitEntity from "./components/lawsuitEntities/addLawsuitEntity";
 import lawsuitEntitiesService from "./myAxios/axios_lawsuitEntitiesService";
 import AllLawsuitEntities from "./components/lawsuitEntities/allLawsuitEntities";
+import EditLawsuitEntity from "./components/lawsuitEntities/editLawsuitEntity";
 
 const Auth = new AuthService();
 
@@ -118,6 +119,15 @@ class App extends Component {
     })
   };
 
+  editLawsuitEntity = (editedLawsuitEntity, oldId) =>{
+    lawsuitEntitiesService.editLawsuitEntity(editedLawsuitEntity, oldId).then(resp =>{
+      // this.setState({
+      //   lawsuitEntities: [...this.state.lawsuitEntities, resp.data]
+      // })
+      this.loadAllLawsuitEntitiesFromDB();
+    })
+  };
+
   addNewCaseToDB = (newCase) =>{
     casesService.addNewCase(newCase).then(resp =>{
 
@@ -135,9 +145,10 @@ class App extends Component {
 
   editCase = (editedCase, oldId) =>{
     casesService.editCase(editedCase,oldId).then(resp =>{
-      this.setState({
-        cases: [...this.state.cases,resp.data]
-      })
+      // this.setState({
+      //   cases: [...this.state.cases,resp.data]
+      // })
+      this.loadAllCasesFromDB();
     })
   };
 
@@ -215,14 +226,25 @@ class App extends Component {
             {/*LAWSUIT ENTITIES*/}
 
             <div>
-              <Route path={"/allLawusitEntities"} exact>
-                <AllLawsuitEntities/>
+              <Route path={"/allLawsuitEntities"} exact>
+                <AllLawsuitEntities lawsuitEntities={this.state.lawsuitEntities}/>
               </Route>
             </div>
 
             <div>
-              <Route path={"/lawsuitEntities/add"} exact>
-                <AddLawsuitEntity onAddLawsuitEntity={this.addNewLawsuitEntityToDB}/>
+              <Route path={"/lawsuitEntities/add"} exact render={(props)=>{
+                return <AddLawsuitEntity onAddLawsuitEntity={this.addNewLawsuitEntityToDB}
+                                         redirectPath={props.location.redirectPath}/>
+              }}>
+              </Route>
+            </div>
+
+            <div>
+              <Route path={"/lawsuitEntities/edit/:lawsuitEntityId"} exact render={(props)=>{
+                return <EditLawsuitEntity onEditLawsuitEntity={this.editLawsuitEntity}
+                                          theLawsuitEntity={props.location.theLawsuitEntity}/>
+              }}>
+
               </Route>
             </div>
 
