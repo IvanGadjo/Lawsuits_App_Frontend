@@ -19,6 +19,9 @@ import AddLawsuitEntity from "./components/lawsuitEntities/addLawsuitEntity";
 import lawsuitEntitiesService from "./myAxios/axios_lawsuitEntitiesService";
 import AllLawsuitEntities from "./components/lawsuitEntities/allLawsuitEntities";
 import EditLawsuitEntity from "./components/lawsuitEntities/editLawsuitEntity";
+import EditDocument from "./components/documents/editDocument";
+import courtsService from "./myAxios/axios-courtsService";
+import documentsService from "./myAxios/axios_documentsService";
 
 const Auth = new AuthService();
 
@@ -34,7 +37,8 @@ class App extends Component {
       employees : [],
       cases: [],
       loggedInEmployee: {},
-      lawsuitEntities: []
+      lawsuitEntities: [],
+      courts: []
     }
   }
 
@@ -42,6 +46,7 @@ class App extends Component {
     this.loadAllEmployeesFromDB();
     this.loadAllCasesFromDB();
     this.loadAllLawsuitEntitiesFromDB();
+    this.loadAllCourtsFromDB();
   }
 
 
@@ -107,6 +112,16 @@ class App extends Component {
     })
   };
 
+  loadAllCourtsFromDB = () =>{
+    courtsService.loadCourts().then(resp =>{
+      this.setState((prevState)=>{
+        return{
+          courts: resp.data
+        }
+      })
+    })
+  };
+
 
 
   // Function for form submitting
@@ -151,6 +166,15 @@ class App extends Component {
       this.loadAllCasesFromDB();
     })
   };
+
+  editDocument = (editedDoc, oldId) =>{
+    documentsService.editDoc(editedDoc,oldId).then(resp =>{
+      this.loadAllCasesFromDB();
+    })
+  };
+
+
+
 
 
 
@@ -259,6 +283,17 @@ class App extends Component {
             <div>
               <Route path={"/documents/add/:caseId"} exact render={(props)=>{
                 return <AddDocument theCaseId={props.match.params.caseId}/>
+              }}>
+              </Route>
+            </div>
+
+            <div>
+              <Route path={"/documents/edit/:caseId"} exact render={(props)=>{
+                return <EditDocument onEditDocument={this.editDocument}
+                                     theDocumentInfo={props.location.theDocumentInfo}
+                                     theCaseId={props.location.theCaseId}
+                                     courts={this.state.courts}
+                                     loggedInEmployee={this.state.loggedInEmployee}/>
               }}>
               </Route>
             </div>

@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from "react";
 import axios from 'axios'
+import {Link} from "react-router-dom";
 
 //props: theCaseId
 
@@ -98,9 +99,19 @@ const Documents = (props) =>{
                             <td>{di.documentDate}</td>
                             <td>{di.fileType}</td>
                             <td>{di.employeeCreatorName}</td>
-                            {/*<td>{di.downloadUrl}</td>*/}
+
+
                             <td>
                                 <button onClick={downloadDocument} value={di.downloadUrl}>Download document</button>
+                                <Link to={{
+                                    pathname: "/documents/edit/"+di.id,
+                                    theDocumentInfo: di,
+                                    theCaseId: props.theCaseId
+                                }}>
+                                    <button>Edit this document</button>
+                                </Link>
+
+                                <button>Transfer to another case</button>
 
                             </td>
                         </tr>
