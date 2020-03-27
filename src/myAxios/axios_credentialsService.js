@@ -1,28 +1,11 @@
-//import axios from './axios-config'
+import React from "react";
 import axios from 'axios'
 
-const employeeService = {
 
-    loadEmployees: () =>{
+const credentialsService = {
 
-        return axios({
-            method: "get",
-            url: "http://localhost:8080/employees",
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Credentials":"true",
-                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-                'Access-Control-Allow-Headers': 'Authorization',
-                'Content-Type': 'application/json',
-                'Authorization' : 'Bearer ' + localStorage.getItem("id_token")
-            },
-        })
-    },
-
-
-    editBasicEmployeeInfo: (editedEmployee,oldId) =>{
-
-        return axios.put("http://localhost:8080/employees/"+oldId,null,{
+    confirmPass: (username, password) =>{
+        return axios.post("http://localhost:8080/confirmPassword",null,{
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Credentials":"true",
@@ -32,14 +15,30 @@ const employeeService = {
                 'Authorization' : 'Bearer ' + localStorage.getItem("id_token")
             },
             params:{
-                "firstName": editedEmployee.firstName,
-                "lastName": editedEmployee.lastName,
-                "role": editedEmployee.role
+                "username": username,
+                "password": password
+            }
+        })
+    },
+
+    changeCredentialsOfEmployee: (employeeId,username,password) =>{
+
+        return axios.put("http://localhost:8080/changeCredentials/"+employeeId,null,{
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Credentials":"true",
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+                'Access-Control-Allow-Headers': 'Authorization',
+                'Content-Type': 'application/json',
+                'Authorization' : 'Bearer ' + localStorage.getItem("id_token")
+            },
+            params:{
+                "username": username,
+                "password": password
             }
         })
     }
 
-
 };
 
-export default employeeService;
+export default credentialsService;

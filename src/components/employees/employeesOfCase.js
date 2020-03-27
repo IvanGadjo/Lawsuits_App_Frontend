@@ -4,7 +4,7 @@ import axios from 'axios'
 
 // props: theCaseId
 
-const Employees = (props) =>{
+const EmployeesOfCase = (props) =>{
 
     const [employeesOfCase, setEmployees] = useState({
        emps:[
@@ -91,4 +91,4 @@ const Employees = (props) =>{
     )
 };
 
-export default Employees;
+export default EmployeesOfCase;

@@ -5,7 +5,7 @@ import Home from '../src/components/home'
 import Header from '../src/components/header'
 import Cases from "./components/cases/cases";
 import Documents from "./components/documents/documents";
-import Employees from "./components/employees/employees";
+import EmployeesOfCase from "./components/employees/employeesOfCase";
 import AddCase from "./components/cases/addCase";
 import AuthService from './components/authentication/AuthService';
 import withAuth from './components/authentication/withAuth';
@@ -22,6 +22,9 @@ import EditLawsuitEntity from "./components/lawsuitEntities/editLawsuitEntity";
 import EditDocument from "./components/documents/editDocument";
 import courtsService from "./myAxios/axios-courtsService";
 import documentsService from "./myAxios/axios_documentsService";
+import EditEmployee from "./components/employees/editEmployee";
+import ConfirmOldPassword from "./components/employees/confirmOldPassword";
+import credentialsService from "./myAxios/axios_credentialsService";
 
 const Auth = new AuthService();
 
@@ -74,7 +77,7 @@ class App extends Component {
   }
 
 
-  // Functions for loading stuff from DB directly on start:
+  // todo: Functions for loading stuff from DB directly on start:
   loadAllEmployeesFromDB = () =>{
     employeeService.loadEmployees().then(resp =>{
       //console.log(resp.data);
@@ -84,6 +87,7 @@ class App extends Component {
           employees: resp.data
         }
       });
+
 
       this.setLoggedInEmployeeInfoToState();
     });
@@ -124,7 +128,7 @@ class App extends Component {
 
 
 
-  // Function for form submitting
+  // todo: Functions for form submitting
   addNewLawsuitEntityToDB = (newLawsuitEntity) =>{
     lawsuitEntitiesService.addNewLawsuitEntity(newLawsuitEntity).then(resp =>{
 
@@ -173,12 +177,39 @@ class App extends Component {
     })
   };
 
+  editBasicEmployeeInfo = (editedEmployee, oldId)=>{
+    employeeService.editBasicEmployeeInfo(editedEmployee,oldId).then(resp =>{
+      this.loadAllEmployeesFromDB();
+    })
+  };
+
+  confirmPasswordOfEmployee = (username,password) =>{
+    credentialsService.confirmPass(username,password)
+  };
+
+  changeEmployeeCredentials = (employeeId,username,password) =>{
+    credentialsService.changeCredentialsOfEmployee(employeeId,username,password).then(resp=>{
+      //console.log("Uspeavme! sega sredi");
+
+      this.props.user.sub = username;
+
+      // mora da go trgens tokenot za da projde bez problemi login requestot (ako najde token AuthService pri fetch
+      // probuva da go decode - na line 39
+      // i ke imas frki)
+      localStorage.removeItem("id_token");
+      //console.log(resp)
+      localStorage.setItem("id_token",resp.data.token);
+
+      this.loadAllEmployeesFromDB()
+    })
+  };
 
 
 
 
 
-  render() {
+
+  render() {//console.log(this.props.user)
     return(
         <Router>
 
@@ -305,7 +336,7 @@ class App extends Component {
             <div>
               <Route path={"/employees/:caseId"} exact render={(props)=>{
                 //console.log(props);
-                return <Employees theCaseId={props.match.params.caseId}/>
+                return <EmployeesOfCase theCaseId={props.match.params.caseId}/>
               }}/>
             </div>
 
@@ -315,13 +346,26 @@ class App extends Component {
                                     employees={this.state.employees}
                                     onAddNewEmployeesToCase={this.addEmployeesToCase}/>
               }}>
-
               </Route>
             </div>
 
             <div>
               <Route path={"/allEmployees"} exact>
                 <AllEmployees employees={this.state.employees}/>
+              </Route>
+            </div>
+
+            <div>
+              <Route path={"/editEmployee"} exact>
+                <EditEmployee loggedInEmployee={this.state.loggedInEmployee}
+                              onEditBasicInfo={this.editBasicEmployeeInfo}/>
+              </Route>
+            </div>
+
+            <div>
+              <Route path={"/confirmOldPassword"} exact>
+                <ConfirmOldPassword loggedInEmployee={this.state.loggedInEmployee}
+                                    onChangeEmployeeCredentials={this.changeEmployeeCredentials}/>
               </Route>
             </div>
 

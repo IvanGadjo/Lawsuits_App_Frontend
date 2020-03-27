@@ -1,7 +1,8 @@
 import React  from "react";
+import {Link} from "react-router-dom";
 
 
-//propsL employee
+//props: employee
 
 
 const home = (props) =>{
@@ -16,6 +17,14 @@ const home = (props) =>{
           <p>Username: {props.employee.username}</p>
           <p>Role: {props.employee.role}</p>
 
+          <br/><br/>
+          <Link to={"/editEmployee"}>
+              <button>Edit info</button>
+          </Link>
+
+          <Link to={"/confirmOldPassword"}>
+            <button>Edit credentials</button>
+          </Link>
 
       </div>
   )

@@ -155,7 +155,7 @@ const ChildCaseDetails = (props) =>{
         //             pathname: "/employees/"+props.childCase.id,
         //             caseId: props.childCase.id
         //         }}>
-        //             <button>All Employees</button>
+        //             <button>All EmployeesOfCase</button>
         //         </Link>
         //
         //         <Link to={"/employees/add"}>

@@ -49,6 +49,7 @@ export default function withAuth(AuthComponent) {
         // vaka bese porano napraveno, mislam deka raboti i so componentDidMount
 
         componentWillMount() {
+            //debugger;
             if(!Auth.loggedIn()){               // ako userot ne e logiran redirect na login
                 this.props.history.replace('/login')
             }

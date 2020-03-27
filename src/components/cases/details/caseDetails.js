@@ -112,7 +112,7 @@ const CaseDetails = (props) =>{
           //                 pathname: "/employees/"+selectedChildCase.id,
           //                 caseId: selectedChildCase.id
           //             }}>
-          //                 <button>All Employees</button>
+          //                 <button>All EmployeesOfCase</button>
           //             </Link>
           //
           //             <Link to={"/employees/add"}>
