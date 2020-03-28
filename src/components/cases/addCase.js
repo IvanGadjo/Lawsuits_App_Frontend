@@ -217,7 +217,8 @@ class AddCase extends Component {
 
                     <br/><br/>
                     <h4>Select employees for the case:</h4>
-                    <EmployeeCheckboxes allEmployees={this.props.employees} onSelectedEmployeesChange={this.selectedEmployeesChange}/>
+                    <EmployeeCheckboxes allEmployees={this.props.employees}
+                                        onSelectedEmployeesChange={this.selectedEmployeesChange}/>
                     <br/><br/>
 
 

@@ -2,9 +2,10 @@ import React,{useState,useEffect} from 'react';
 import axios from 'axios'
 
 
-// props: theCaseId
+// props: theCaseId, onRemoveEmployee
 
 const EmployeesOfCase = (props) =>{
+
 
     const [employeesOfCase, setEmployees] = useState({
        emps:[
@@ -67,6 +68,26 @@ const EmployeesOfCase = (props) =>{
     },[]);
 
 
+    const removeEmployeeFromCase = (id) =>{
+
+        // the request needs to have an array as a param
+        let empArray = [id];
+        props.onRemoveEmployee(empArray,props.theCaseId);
+
+        setEmployees(prevState => {
+
+            const startIndex = prevState.emps.findIndex(c =>
+                c.id === id
+            );
+            prevState.emps.splice(startIndex,1);
+            const newEmps = prevState.emps;
+
+            return{
+                emps: newEmps
+            }
+        })
+
+    };
 
 
 
@@ -81,6 +102,7 @@ const EmployeesOfCase = (props) =>{
                             <ul >
                                 <h6>{e.firstName} {e.lastName}</h6>
                                 <p>{e.role}</p>
+                                <button onClick={() => removeEmployeeFromCase(e.id)}>Remove from case</button>
                             </ul>
                         </li>
                     </ul>

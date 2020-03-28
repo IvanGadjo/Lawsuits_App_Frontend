@@ -172,6 +172,11 @@ class App extends Component {
   addEmployeesToCase = (employeesToAdd, caseId) =>{
     casesService.addEmployeesToCase(employeesToAdd,caseId);
   };
+  removeEmployeesFromCase = (employeesToRemove, caseId) =>{
+    casesService.removeEmployeesFromCase(employeesToRemove, caseId).then(r =>{
+      this.loadAllCasesFromDB();
+    });
+  };
   editCase = (editedCase, oldId) =>{
     casesService.editCase(editedCase,oldId).then(resp =>{
       // this.setState({
@@ -370,7 +375,8 @@ class App extends Component {
             <div>
               <Route path={"/employees/:caseId"} exact render={(props)=>{
                 //console.log(props);
-                return <EmployeesOfCase theCaseId={props.match.params.caseId}/>
+                return <EmployeesOfCase theCaseId={props.match.params.caseId}
+                                        onRemoveEmployee={this.removeEmployeesFromCase}/>
               }}/>
             </div>
 

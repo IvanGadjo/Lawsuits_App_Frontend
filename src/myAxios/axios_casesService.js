@@ -72,13 +72,35 @@ const casesService = {
 
     addEmployeesToCase: (employees,caseId) =>{
 
-        console.log(employees);
+        //console.log(employees);
 
         const employeesString = employees.reduce((totalStr,emp)=>{
             return totalStr+","+emp;
         });
 
         axios.post("http://localhost:8080/cases/addEmployees/" + caseId, null, {
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Credentials": "true",
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+                'Access-Control-Allow-Headers': 'Authorization',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("id_token")
+            },
+            params: {
+                "employeeIds": employeesString
+            }
+        })
+    },
+
+    removeEmployeesFromCase: (employees, caseId) =>{
+
+        const employeesString = employees.reduce((totalStr,emp)=>{
+            return totalStr+","+emp;
+        });
+
+        //console.log(employeesString)
+        return axios.put("http://localhost:8080/cases/removeEmployees/" + caseId, null,{
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Credentials": "true",
