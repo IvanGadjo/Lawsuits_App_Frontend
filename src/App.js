@@ -129,6 +129,7 @@ class App extends Component {
 
 
   // todo: Functions for form submitting
+  // Lawsuit Entities
   addNewLawsuitEntityToDB = (newLawsuitEntity) =>{
     lawsuitEntitiesService.addNewLawsuitEntity(newLawsuitEntity).then(resp =>{
 
@@ -137,7 +138,6 @@ class App extends Component {
       });
     })
   };
-
   editLawsuitEntity = (editedLawsuitEntity, oldId) =>{
     lawsuitEntitiesService.editLawsuitEntity(editedLawsuitEntity, oldId).then(resp =>{
       // this.setState({
@@ -146,7 +146,19 @@ class App extends Component {
       this.loadAllLawsuitEntitiesFromDB();
     })
   };
+  deleteLawsuitEntity = (id) =>{
+    this.setState((prevState)=>{
+      const startIdx = prevState.lawsuitEntities.findIndex(le => le.id === id);
+      prevState.lawsuitEntities.splice(startIdx,1);
+      const newLE = prevState.lawsuitEntities;
 
+      return{
+        lawsuitEntities: newLE
+      }
+    })
+  };
+
+  // Cases
   addNewCaseToDB = (newCase) =>{
     casesService.addNewCase(newCase).then(resp =>{
 
@@ -157,11 +169,9 @@ class App extends Component {
       })
     })
   };
-
   addEmployeesToCase = (employeesToAdd, caseId) =>{
     casesService.addEmployeesToCase(employeesToAdd,caseId);
   };
-
   editCase = (editedCase, oldId) =>{
     casesService.editCase(editedCase,oldId).then(resp =>{
       // this.setState({
@@ -170,23 +180,42 @@ class App extends Component {
       this.loadAllCasesFromDB();
     })
   };
+  deleteCase = (caseId) =>{
+    casesService.deleteCase(caseId).then(resp =>{
+      this.setState((prevState)=>{
 
+        const startIndex = prevState.cases.findIndex(c =>
+          c.id === caseId
+        );
+        prevState.cases.splice(startIndex,1);
+        const newCases = prevState.cases;
+
+        return{
+          cases: newCases
+        }
+      })
+    })
+  };
+
+  // Docs
   editDocument = (editedDoc, oldId) =>{
     documentsService.editDoc(editedDoc,oldId).then(resp =>{
       this.loadAllCasesFromDB();
     })
   };
+  deleteDocument = (id) =>{
+    documentsService.deleteDoc(id);
+  };
 
+  // Emps
   editBasicEmployeeInfo = (editedEmployee, oldId)=>{
     employeeService.editBasicEmployeeInfo(editedEmployee,oldId).then(resp =>{
       this.loadAllEmployeesFromDB();
     })
   };
-
   confirmPasswordOfEmployee = (username,password) =>{
     credentialsService.confirmPass(username,password)
   };
-
   changeEmployeeCredentials = (employeeId,username,password) =>{
     credentialsService.changeCredentialsOfEmployee(employeeId,username,password).then(resp=>{
       //console.log("Uspeavme! sega sredi");
@@ -209,7 +238,7 @@ class App extends Component {
 
 
 
-  render() {//console.log(this.props.user)
+  render() {console.log(this.state.lawsuitEntities)
     return(
         <Router>
 
@@ -252,7 +281,8 @@ class App extends Component {
             {/*CASES*/}
             <div>
               <Route path={"/cases"} exact>
-                <Cases cases={this.state.cases}/>
+                <Cases cases={this.state.cases}
+                        onDeleteCase={this.deleteCase}/>
               </Route>
             </div>
 
@@ -282,7 +312,9 @@ class App extends Component {
 
             <div>
               <Route path={"/allLawsuitEntities"} exact>
-                <AllLawsuitEntities lawsuitEntities={this.state.lawsuitEntities}/>
+                <AllLawsuitEntities lawsuitEntities={this.state.lawsuitEntities}
+                                    onDeleteLawsuitEntity={this.deleteLawsuitEntity}/>
+
               </Route>
             </div>
 
@@ -299,15 +331,17 @@ class App extends Component {
                 return <EditLawsuitEntity onEditLawsuitEntity={this.editLawsuitEntity}
                                           theLawsuitEntity={props.location.theLawsuitEntity}/>
               }}>
-
               </Route>
             </div>
+
+
 
 
             {/*DOCUMENTS*/}
             <div>
               <Route path={"/documents/:caseId"} exact render={(props)=>{
-                return <Documents theCaseId={props.match.params.caseId}/>
+                return <Documents theCaseId={props.match.params.caseId}
+                                  onDelete={this.deleteDocument}/>
               }}/>
             </div>
 

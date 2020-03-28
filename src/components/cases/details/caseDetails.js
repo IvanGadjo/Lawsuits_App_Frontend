@@ -6,12 +6,13 @@ import axios from 'axios';
 import ChildCaseDetails from "./childCaseDetails";
 
 
-// props: allCases, parentCase
+// props: allCases, parentCase, onDeleteCase
 
 
 const CaseDetails = (props) =>{
 
     const defaultOption = "cc";
+
 
 
     const [selectedChildCase, setChildCase]=useState({
@@ -92,55 +93,10 @@ const CaseDetails = (props) =>{
       }
       else{
 
-          return <ChildCaseDetails childCase={selectedChildCase} colapseCallback={colapseChildCase}/>
+          return <ChildCaseDetails childCase={selectedChildCase}
+                                   colapseCallback={colapseChildCase}
+                                   onDeleteCase={props.onDeleteCase}/>
 
-          // return <tr bgcolor="#f7da63">
-          //         <td>{selectedChildCase.caseNumber}</td>
-          //         <td>{selectedChildCase.name}</td>
-          //         <td>{selectedChildCase.createdAt}</td>
-          //         <td>{selectedChildCase.basis}</td>
-          //         <td>{selectedChildCase.value}</td>
-          //         <td>{selectedChildCase.executed.toString()}</td>
-          //         <td>{selectedChildCase.proxy}</td>
-          //
-          //         <td>TMP</td>
-          //         <td>TMP</td>
-          //
-          //         <td>
-          //
-          //             <Link to={{
-          //                 pathname: "/employees/"+selectedChildCase.id,
-          //                 caseId: selectedChildCase.id
-          //             }}>
-          //                 <button>All EmployeesOfCase</button>
-          //             </Link>
-          //
-          //             <Link to={"/employees/add"}>
-          //                 <button>Add new employee</button>
-          //             </Link>
-          //         </td>
-          //         <td>
-          //             <Link to={{
-          //                 pathname: "/documents/"+selectedChildCase.id,
-          //                 caseId: selectedChildCase.id
-          //             }}>
-          //                 <button>All documents</button>
-          //             </Link>
-          //
-          //             <Link to={"/documents/add"}>
-          //                 <button>Add document</button>
-          //             </Link>
-          //         </td>
-          //         <td>{selectedChildCase.phase}</td>
-          //         <td>
-          //             <Link to={"/cases/edit"}>
-          //                 <button>Edit</button>
-          //             </Link>
-
-          {/*            <button>Delete</button>*/}
-
-          {/*        </td>*/}
-          {/*      </tr>*/}
       }
     };
 
@@ -171,8 +127,20 @@ const CaseDetails = (props) =>{
     };
 
     const colapseChildCase = () =>{
-        // todo: implement
 
+        // sets the child case to default values because showChildCase() renders the child case comp
+        // based on this value
+        setChildCase({
+            caseNumber: 0,
+            name: "tmp name",
+            createdAt: "tmp date",
+            basis: "tmp basis",
+            value:"tmp value",
+            executed: false,
+            proxy: "tmp proxy",
+            phase: "tmp phase",
+            id: 0
+        })
     };
 
     const renderPlaintiff = () =>{
@@ -189,6 +157,7 @@ const CaseDetails = (props) =>{
         else
             return <td>{caseSued.name}</td>;
     };
+
 
 
     //console.log(props.allCases);
@@ -253,7 +222,8 @@ const CaseDetails = (props) =>{
                         <button>Edit</button>
                     </Link>
 
-                    <button>Delete</button>
+                    {/*<button onClick={() => deleteParentCase(props.parentCase.id)}>Delete</button>*/}
+                    <button onClick={()=>props.onDeleteCase(props.parentCase.id)}>Delete</button>
 
                     <Dropdown options={loadChildCasesNames(props.parentCase.id)} onChange={onSelect} value={defaultOption} placeholder="Child cases" />
                 </td>

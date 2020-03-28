@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-    baseURL: 'http://localhost/8080',
+    baseURL: 'http://localhost:8080',
     headers:{
         'Access-Control-Allow-Origin': '*',
         "Access-Control-Allow-Credentials":"true",
@@ -16,4 +16,4 @@ const instance = axios.create({
 export default instance;
 
 
-// fixme: Ne se koristi nigde ova
+// fixme: Kasno popraveno, treba da se koristi na site mesta kade sto pravis axios povici

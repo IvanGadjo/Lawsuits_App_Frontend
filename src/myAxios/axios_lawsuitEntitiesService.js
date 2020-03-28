@@ -56,6 +56,19 @@ const lawsuitEntitiesService = {
             }
         })
 
+    },
+
+    deleteLawsuitEntity: (id) =>{
+        return axios.delete("http://localhost:8080/lawsuit-entities/"+id,{
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Credentials":"true",
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+                'Access-Control-Allow-Headers': 'Authorization',
+                'Content-Type': 'application/json',
+                'Authorization' : 'Bearer ' + localStorage.getItem("id_token")
+            }
+        })
     }
 
 };

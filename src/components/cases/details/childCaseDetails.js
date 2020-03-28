@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import axios from 'axios';
 
 
-//props: childCase
+//props: childCase, colapseCallback, onDeleteCase
 
 
 const ChildCaseDetails = (props) =>{
@@ -68,7 +68,9 @@ const ChildCaseDetails = (props) =>{
 
 
 
+
     const renderChildCase = () =>{
+
         return(
             <tr bgcolor="#f7da63">
                 <td>{props.childCase.caseNumber}</td>
@@ -123,7 +125,10 @@ const ChildCaseDetails = (props) =>{
                         <button>Edit</button>
                     </Link>
 
-                    <button>Delete</button>
+                    <button onClick={() => {
+                        props.onDeleteCase(props.childCase.id);
+                        props.colapseCallback()
+                    }}>Delete</button>
 
                     <button onClick={props.colapseCallback}>Colapse</button>
                 </td>
@@ -137,56 +142,6 @@ const ChildCaseDetails = (props) =>{
 
 
     return(
-        // <tr bgcolor="#f7da63">
-        //     <td>{props.childCase.caseNumber}</td>
-        //     <td>{props.childCase.name}</td>
-        //     <td>{props.childCase.createdAt}</td>
-        //     <td>{props.childCase.basis}</td>
-        //     <td>{props.childCase.value}</td>
-        //     <td>{props.childCase.executed.toString()}</td>
-        //     <td>{props.childCase.proxy}</td>
-        //
-        //     {renderPlaintiff()}
-        //     {renderSued()}
-        //
-        //     <td>
-        //
-        //         <Link to={{
-        //             pathname: "/employees/"+props.childCase.id,
-        //             caseId: props.childCase.id
-        //         }}>
-        //             <button>All EmployeesOfCase</button>
-        //         </Link>
-        //
-        //         <Link to={"/employees/add"}>
-        //             <button>Add new employee</button>
-        //         </Link>
-        //     </td>
-        //     <td>
-        //         <Link to={{
-        //             pathname: "/documents/"+props.childCase.id,
-        //             caseId: props.childCase.id
-        //         }}>
-        //             <button>All documents</button>
-        //         </Link>
-        //
-        //         <Link to={"/documents/add"}>
-        //             <button>Add document</button>
-        //         </Link>
-        //     </td>
-        //     <td>{props.childCase.phase}</td>
-        //
-        //     <td>
-        //         <Link to={"/cases/edit"}>
-        //             <button>Edit</button>
-        //         </Link>
-        //
-        //         <button>Delete</button>
-        //
-        //         <button onClick={props.colapseCallback}>Colapse</button>
-        //     </td>
-        //
-        // </tr>
         renderChildCase()
     )
 };

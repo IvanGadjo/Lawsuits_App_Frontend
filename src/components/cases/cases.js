@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import CaseDetails from "./details/caseDetails";
 
 
-//props: cases
+//props: cases, onDeleteCase
 
 
 class Cases extends Component{
@@ -44,7 +44,9 @@ class Cases extends Component{
                     {this.props.cases.filter((c)=>{
                         return c.parentCase == null;
                     }).map((c,kluc)=>
-                        <CaseDetails allCases={this.props.cases} parentCase={c} key={kluc}/>
+                        <CaseDetails allCases={this.props.cases}
+                                     parentCase={c} key={kluc}
+                                     onDeleteCase={this.props.onDeleteCase}/>
                     )}
 
 

@@ -1,8 +1,9 @@
 import React,{useState,useEffect} from "react";
 import axios from 'axios'
 import {Link} from "react-router-dom";
+import {withRouter} from 'react-router-dom';
 
-//props: theCaseId
+//props: theCaseId, onDelete
 
 const Documents = (props) =>{
 
@@ -74,6 +75,12 @@ const Documents = (props) =>{
         })
     };
 
+    const deleteDocument = (id) =>{
+        props.onDelete(id);
+        props.history.push("/cases")
+        //console.log(id)
+    };
+
     return(
         <div>
             <table>
@@ -111,6 +118,8 @@ const Documents = (props) =>{
                                     <button>Edit this document</button>
                                 </Link>
 
+                                <button onClick={() => deleteDocument(di.id)}>Delete</button>
+
                                 <button>Transfer to another case</button>
 
                             </td>
@@ -123,4 +132,4 @@ const Documents = (props) =>{
 };
 
 
-export default Documents;
+export default withRouter(Documents);
