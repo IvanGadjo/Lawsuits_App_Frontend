@@ -5,6 +5,8 @@ import {withRouter} from 'react-router-dom';
 
 //props: theCaseId, onDelete
 
+// fixme: Only works with pdf files
+
 const Documents = (props) =>{
 
     const [docsInfo,setDocs] = useState({
@@ -42,37 +44,32 @@ const Documents = (props) =>{
     },[]);
 
 
-    const downloadDocument = (e) =>{
+    const downloadDocument = (name,url) =>{
 
-        console.log("e target val:",e.target.value)
+        //console.log(name,url);
 
         axios({
+            url: url,
             method: "get",
-            url: e.target.value,
+            responseType: 'blob',
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Credentials":"true",
                 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
                 'Access-Control-Allow-Headers': 'Authorization',
-                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/json',
                 'Authorization' : 'Bearer ' + localStorage.getItem("id_token")
             }
-        }).then(resp =>{
-
-            console.log(resp);
-
-            // fixme: sega za sega raboti samo so txt fajlovi
-            var fileDownload = require('js-file-download');
-            fileDownload(resp.data, 'myfile.txt');
-
-            // resp.data.blob().then(blob => {
-            //     let url = window.URL.createObjectURL(blob);
-            //     let a = document.createElement('a');
-            //     a.href = url;
-            //     a.download = 'employees.json';
-            //     a.click();
-            // })
+        }).then((resp)=>{
+            console.log(resp.data);
+            const url = window.URL.createObjectURL(new Blob([resp.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', name);
+            document.body.appendChild(link);
+            link.click();
         })
+
     };
 
     const deleteDocument = (id) =>{
@@ -109,7 +106,7 @@ const Documents = (props) =>{
 
 
                             <td>
-                                <button onClick={downloadDocument} value={di.downloadUrl}>Download document</button>
+                                <button onClick={() =>downloadDocument(di.name,di.downloadUrl)} value={di.downloadUrl}>Download document</button>
                                 <Link to={{
                                     pathname: "/documents/edit/"+di.id,
                                     theDocumentInfo: di,

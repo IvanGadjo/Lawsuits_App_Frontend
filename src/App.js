@@ -211,6 +211,11 @@ class App extends Component {
   deleteDocument = (id) =>{
     documentsService.deleteDoc(id);
   };
+  uploadDocument = (formData, otherParams) =>{
+    documentsService.uploadDoc(formData, otherParams).then(resp =>{
+      this.loadAllCasesFromDB();
+    })
+  };
 
   // Emps
   editBasicEmployeeInfo = (editedEmployee, oldId)=>{
@@ -243,7 +248,7 @@ class App extends Component {
 
 
 
-  render() {console.log(this.state.lawsuitEntities)
+  render() {
     return(
         <Router>
 
@@ -352,7 +357,11 @@ class App extends Component {
 
             <div>
               <Route path={"/documents/add/:caseId"} exact render={(props)=>{
-                return <AddDocument theCaseId={props.match.params.caseId}/>
+                return <AddDocument theCaseId={props.match.params.caseId}
+                                    allCases={this.state.cases}
+                                    courts={this.state.courts}
+                                    loggedInEmployee={this.state.loggedInEmployee}
+                                    onUploadDoc={this.uploadDocument}/>
               }}>
               </Route>
             </div>
@@ -364,8 +373,8 @@ class App extends Component {
                                      theCaseId={props.location.theCaseId}
                                      courts={this.state.courts}
                                      loggedInEmployee={this.state.loggedInEmployee}/>
-              }}>
-              </Route>
+              }}/>
+
             </div>
 
 
