@@ -78,6 +78,9 @@ const Documents = (props) =>{
         //console.log(id)
     };
 
+
+
+
     return(
         <div>
             <table>
@@ -117,7 +120,14 @@ const Documents = (props) =>{
 
                                 <button onClick={() => deleteDocument(di.id)}>Delete</button>
 
-                                <button>Transfer to another case</button>
+                                <Link to={{
+                                    pathname: "/documents/transfer/"+di.id,
+                                    theDocumentInfo: di,
+                                    thisCaseId: props.theCaseId
+                                }}>
+                                    <button>Transfer to another case</button>
+                                </Link>
+
 
                             </td>
                         </tr>

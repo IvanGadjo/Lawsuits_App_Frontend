@@ -60,18 +60,17 @@ class LogIn extends React.Component{
                         <input type='text' name={'password'} onChange={this.handleChange}/>
                     </div>
 
-
-                    {/*<div>*/}
-                    {/*    <Link to={'/home'}>*/}
-                    {/*        <button type='submit'>Log in</button>*/}
-                    {/*    </Link>*/}
-                    {/*    <button>Cancel</button>*/}
-                    {/*</div>*/}
                     <div>
                         <input type='submit' className={'form-submit'} value={'submit'} />
                     </div>
 
+
                 </form>
+
+                <br/><br/>
+                <Link to={'/register'}>
+                    <button>Register new user</button>
+                </Link>
             </div>
         )
     }

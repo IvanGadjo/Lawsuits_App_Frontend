@@ -128,6 +128,27 @@ const casesService = {
                 'Authorization': 'Bearer ' + localStorage.getItem("id_token")
             }
         })
+    },
+
+    moveDocsBetweenCases: (docs, caseId) =>{
+        const docsString = docs.reduce((totalStr,d)=>{
+            return totalStr+","+d;
+        });
+
+        return axios.put("http://localhost:8080/cases/moveDocs",null,{
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Credentials": "true",
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+                'Access-Control-Allow-Headers': 'Authorization',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("id_token")
+            },
+            params: {
+                "idTo": caseId,
+                "documentIds": docsString
+            }
+        })
     }
 };
 

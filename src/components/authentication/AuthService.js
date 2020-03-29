@@ -11,7 +11,7 @@ export default class AuthService {
 
     // zema token od API serverot (bi trebalo da ti e na backend) so pomos
     // na fetch API
-    login(username, password){ debugger;
+    login(username, password){
         return this.fetch(`${this.domain}/login`,{
             method:'POST',
             body: JSON.stringify({

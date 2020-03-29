@@ -25,6 +25,7 @@ import documentsService from "./myAxios/axios_documentsService";
 import EditEmployee from "./components/employees/editEmployee";
 import ConfirmOldPassword from "./components/employees/confirmOldPassword";
 import credentialsService from "./myAxios/axios_credentialsService";
+import TransferDocument from "./components/documents/transferDocument";
 
 const Auth = new AuthService();
 
@@ -201,6 +202,11 @@ class App extends Component {
       })
     })
   };
+  moveDocsBetweenCases = (docs, newCaseId, oldCaseId) =>{
+    casesService.moveDocsBetweenCases(docs,newCaseId).then( resp=>{
+      this.loadAllCasesFromDB();
+    })
+  };
 
   // Docs
   editDocument = (editedDoc, oldId) =>{
@@ -374,7 +380,15 @@ class App extends Component {
                                      courts={this.state.courts}
                                      loggedInEmployee={this.state.loggedInEmployee}/>
               }}/>
+            </div>
 
+            <div>
+              <Route path={"/documents/transfer/:docId"} exact render={(props)=>{
+                return <TransferDocument theDocumentInfo={props.location.theDocumentInfo}
+                                          thisCaseId={props.location.thisCaseId}
+                                          cases={this.state.cases}
+                                          onMoveDoc={this.moveDocsBetweenCases}/>
+              }}/>
             </div>
 
 
