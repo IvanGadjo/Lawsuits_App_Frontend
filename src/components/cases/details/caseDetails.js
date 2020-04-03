@@ -95,7 +95,8 @@ const CaseDetails = (props) =>{
 
           return <ChildCaseDetails childCase={selectedChildCase}
                                    colapseCallback={colapseChildCase}
-                                   onDeleteCase={props.onDeleteCase}/>
+                                   onDeleteCase={props.onDeleteCase}
+                                   shouldHaveCollapseButton={true}/>
 
       }
     };
@@ -174,7 +175,8 @@ const CaseDetails = (props) =>{
             <tr>
                 <td>{props.parentCase.caseNumber}</td>
                 <td>{props.parentCase.name}</td>
-                <td>{props.parentCase.createdAt}</td>
+                <td>{props.parentCase.createdAt.substr(0,10)+" "
+                        +props.parentCase.createdAt.substr(11,8)}</td>
                 <td>{props.parentCase.basis}</td>
                 <td>{props.parentCase.value}</td>
                 <td>{props.parentCase.executed.toString()}</td>

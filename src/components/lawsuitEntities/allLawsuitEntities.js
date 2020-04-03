@@ -1,9 +1,10 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import axios from '../../myAxios/axios-config'
+import FormSearch from "../FormSearch";
 
 
-// props: lawsuitEntities, onDeleteLawsuitEntity
+// props: lawsuitEntities, onDeleteLawsuitEntity, onSearch, onClickReset
 
 
 const AllLawsuitEntities = (props) =>{
@@ -77,6 +78,12 @@ const AllLawsuitEntities = (props) =>{
 
     return(
         <div>
+
+            <br/><br/>
+            <FormSearch onSearch={props.onSearch}
+                        onClickReset={props.onClickReset}/>
+            <br/>
+
             <h2>All registered lawsuit entities:</h2>
 
             <br/>

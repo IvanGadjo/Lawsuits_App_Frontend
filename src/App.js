@@ -158,6 +158,14 @@ class App extends Component {
       }
     })
   };
+  searchLawsuitEntities = (term) =>{
+    lawsuitEntitiesService.searchLawsuitEntities(term).then(resp =>{
+      //console.log(resp.data)
+      this.setState({
+        lawsuitEntities: resp.data
+      })
+    })
+  };
 
   // Cases
   addNewCaseToDB = (newCase) =>{
@@ -207,6 +215,17 @@ class App extends Component {
       this.loadAllCasesFromDB();
     })
   };
+  searchCases = (term) =>{
+    casesService.searchCase(term).then(resp =>{
+      //console.log(resp.data);
+
+      this.setState({
+        cases: resp.data
+      })
+    })
+
+  };
+
 
   // Docs
   editDocument = (editedDoc, oldId) =>{
@@ -229,6 +248,7 @@ class App extends Component {
       this.loadAllEmployeesFromDB();
     })
   };
+    // functionality implemented with hook
   confirmPasswordOfEmployee = (username,password) =>{
     credentialsService.confirmPass(username,password)
   };
@@ -248,6 +268,14 @@ class App extends Component {
       this.loadAllEmployeesFromDB()
     })
   };
+  searchEmployees = (term) =>{
+    employeeService.searchEmployees(term).then(resp =>{
+      //console.log(resp.data)
+      this.setState({
+        employees: resp.data
+      })
+    })
+  };
 
 
 
@@ -260,7 +288,7 @@ class App extends Component {
 
 
           <div>
-            <h2 className={"container-fluid p-3 my-3 bg-dark text-white"}>The lawsuits app of Posta</h2>
+            <h2 className={"container-fluid p-3 my-3 bg-dark text-white"}>~ The lawsuits app ~</h2>
 
             <button type="button" className="form-submit" onClick={this.handleLogout.bind(this)}>Logout</button>
             <br/><br/>
@@ -298,7 +326,9 @@ class App extends Component {
             <div>
               <Route path={"/cases"} exact>
                 <Cases cases={this.state.cases}
-                        onDeleteCase={this.deleteCase}/>
+                        onDeleteCase={this.deleteCase}
+                        onSearch={this.searchCases}
+                        onClickReset={this.loadAllCasesFromDB}/>
               </Route>
             </div>
 
@@ -329,7 +359,9 @@ class App extends Component {
             <div>
               <Route path={"/allLawsuitEntities"} exact>
                 <AllLawsuitEntities lawsuitEntities={this.state.lawsuitEntities}
-                                    onDeleteLawsuitEntity={this.deleteLawsuitEntity}/>
+                                    onDeleteLawsuitEntity={this.deleteLawsuitEntity}
+                                    onSearch={this.searchLawsuitEntities}
+                                    onClickReset={this.loadAllLawsuitEntitiesFromDB}/>
 
               </Route>
             </div>
@@ -414,7 +446,9 @@ class App extends Component {
 
             <div>
               <Route path={"/allEmployees"} exact>
-                <AllEmployees employees={this.state.employees}/>
+                <AllEmployees employees={this.state.employees}
+                              onSearch={this.searchEmployees}
+                              onClickReset={this.loadAllEmployeesFromDB}/>
               </Route>
             </div>
 

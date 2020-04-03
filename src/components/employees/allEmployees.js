@@ -1,14 +1,21 @@
 import React from "react";
 import BasicEmployeeCaseInfo from "./basicEmployeeCaseInfo";
+import FormSearch from "../FormSearch";
 
 
-// props: employees
+// props: employees, onSearch, onClickReset
 
 const AllEmployees = (props) =>{
 
 
     return(
         <div>
+
+            <br/><br/>
+            <FormSearch onSearch={props.onSearch}
+                        onClickReset={props.onClickReset}/>
+            <br/>
+
             <table id='cases-table'>
                 <thead>
                     <tr>

@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import axios from 'axios';
 
 
-//props: childCase, colapseCallback, onDeleteCase
+//props: childCase, colapseCallback, onDeleteCase, shouldHaveCollapseButton
 
 
 const ChildCaseDetails = (props) =>{
@@ -66,7 +66,14 @@ const ChildCaseDetails = (props) =>{
             return <td>{childCaseSued.name}</td>;
     };
 
-
+    const renderCollapseButton = () =>{
+      if (props.shouldHaveCollapseButton)
+          return (
+              <button onClick={props.colapseCallback}>Colapse</button>
+          );
+      else
+          return <div/>
+    };
 
 
     const renderChildCase = () =>{
@@ -75,7 +82,8 @@ const ChildCaseDetails = (props) =>{
             <tr bgcolor="#f7da63">
                 <td>{props.childCase.caseNumber}</td>
                 <td>{props.childCase.name}</td>
-                <td>{props.childCase.createdAt}</td>
+                <td>{props.childCase.createdAt.substr(0,10)+" "
+                            +props.childCase.createdAt.substr(11,8)}</td>
                 <td>{props.childCase.basis}</td>
                 <td>{props.childCase.value}</td>
                 <td>{props.childCase.executed.toString()}</td>
@@ -130,7 +138,9 @@ const ChildCaseDetails = (props) =>{
                         props.colapseCallback()
                     }}>Delete</button>
 
-                    <button onClick={props.colapseCallback}>Colapse</button>
+
+                    {renderCollapseButton()}
+
                 </td>
 
             </tr>
