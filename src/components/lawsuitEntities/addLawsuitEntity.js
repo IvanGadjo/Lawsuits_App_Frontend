@@ -2,6 +2,7 @@ import React, {Component, useState} from "react";
 import {Link} from "react-router-dom";
 import {withRouter} from 'react-router-dom';
 import { useForm } from 'react-hook-form'
+import { useHistory } from 'react-router-dom';
 
 // props: onAddLawsuitEntity, redirectPath
 
@@ -16,6 +17,9 @@ const AddLawsuitEntity = (props) =>{
     //
     //     //console.log(this.props.redirectPath)
     // }
+
+    //console.log(props.redirectPath)
+    const hist = useHistory();
 
     const { register, handleSubmit, errors } = useForm(); // initialise the hook
 
@@ -62,8 +66,17 @@ const AddLawsuitEntity = (props) =>{
 
         props.onAddLawsuitEntity(newLawsuitEntity);
 
-        props.history.push(props.redirectPath);
 
+
+        props.history.push(props.redirectPath);
+        // if (props.redirectPath == "/cases") {
+        //     debugger
+        //     props.history.push(props.redirectPath);
+        // }
+        // else {
+        //     debugger
+        //     hist.goBack();
+        // }
 
 
 
@@ -134,6 +147,9 @@ const AddLawsuitEntity = (props) =>{
                         <Link to={props.redirectPath}>
                             <button>Cancel</button>
                         </Link>
+                        {/*<button onClick={() => {*/}
+                        {/*    hist.push("/cases/edit/24")*/}
+                        {/*}}>Cancel</button>*/}
                     </div>
 
                 </form>

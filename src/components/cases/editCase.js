@@ -5,7 +5,7 @@ import {withRouter} from 'react-router-dom';
 import 'react-dropdown/style.css';
 
 
-// props: theCase, lawsuitEntities
+// props: theCase, lawsuitEntities, loggedInEmployee, onEditCase
 
 // fixme: When edditing a case, the createdBy field also changes to the editor. Maybe it should stay as before
 
@@ -27,6 +27,7 @@ class EditCase extends Component {
 
     // loads options for dropdowns for plaintiff and sued
     loadLawsuitEntitiesNames = () =>{
+        //console.log(this.props)
         let menuOptions = [];
         this.props.lawsuitEntities.forEach(le =>{
             menuOptions.push(le.name)
@@ -136,7 +137,10 @@ class EditCase extends Component {
                                   placeholder={"plaintiffs"}
                                   id={"case_plaintiff"}
                         />
-                        <Link to={"/lawsuitEntities/add"}>
+                        <Link to={{
+                            pathname: "/lawsuitEntities/add",
+                            redirectPath: "/cases"
+                        }}>
                             <button>Add new plaintiff</button><br/>
                         </Link>
                     </div>
@@ -151,7 +155,10 @@ class EditCase extends Component {
                                   placeholder={""}
                                   id={"case_sued"}
                         />
-                        <Link to={"/lawsuitEntities/add"}>
+                        <Link to={{
+                            pathname: "/lawsuitEntities/add",
+                            redirectPath: "/cases"
+                        }}>
                             <button>Add new sued</button>
                         </Link>
                     </div>

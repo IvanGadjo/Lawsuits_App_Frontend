@@ -1,70 +1,76 @@
-import React, {Component} from "react";
+import React, {Component, useState} from "react";
 import {Link} from "react-router-dom";
 import {withRouter} from 'react-router-dom';
+import { useForm } from 'react-hook-form'
 
 
 // props: onEditLawsuitEntity, theLawsuitEntity
 
 
-class EditLawsuitEntity extends Component{
+const EditLawsuitEntity = (props) =>{
 
-    constructor(props) {
-        super(props);
 
-        let option = "option1";
-        if (this.props.theLawsuitEntity.company){
-            option = "option2"
-        }
+    const { register, handleSubmit, errors } = useForm(); // initialise the hook
 
-        this.state = {
-            selectedOption: option
-        }
+    const [selectedOption, setSelectedOpt] = useState("option1");
 
-    }
-
-    handleOptionChange = (e) =>{
-        this.setState({
-            selectedOption: e.target.value
-        });
+    const handleOptionChange = (e) =>{
+        setSelectedOpt(e.target.value);
     };
 
 
-    onFormSubmit = (formData) =>{
-        formData.preventDefault();
-
+    const onFormSubmit = (formData) =>{
+        //formData.preventDefault();
+        //console.log(formData)
         let person = true;
-        if (this.state.selectedOption === "option1"){
+        if (selectedOption === "option1"){
             person = false;
         }
 
         const editedLawsuitEntity = {
-            "name": formData.target.lawsuitEntity_name.value,
-            "emb": formData.target.lawsuitEntity_emb.value,
+            "name": formData.lawsuitEntity_name,
+            "emb": formData.lawsuitEntity_emb,
             "isCompany": person
         };
 
-        //console.log(editedLawsuitEntity)
+        //console.log(editedLawsuitEntity);
 
-        this.props.onEditLawsuitEntity(editedLawsuitEntity,this.props.theLawsuitEntity.id);
+        props.onEditLawsuitEntity(editedLawsuitEntity,props.theLawsuitEntity.id);
 
-         this.props.history.push("/allLawsuitEntities");
+        props.history.push("/allLawsuitEntities");
 
     };
 
-    render() {
-        return(
-            <div>
-                <h3>Edit the {this.props.theLawsuitEntity.name} lawsuit entity</h3>
+    return(
+        <div>
+                <h3>Edit the {props.theLawsuitEntity.name} lawsuit entity</h3>
 
-                <form onSubmit={this.onFormSubmit} noValidate>
+                <form onSubmit={handleSubmit(onFormSubmit)} noValidate>
                     <label htmlFor={"lawsuitEntity_name"}>Name:</label>
                     <br/>
-                    <input type={"text"} id={"lawsuitEntity_name"} defaultValue={this.props.theLawsuitEntity.name}/>
+                    <input type={"text"} id={"lawsuitEntity_name"} name={"lawsuitEntity_name"}
+                           defaultValue={props.theLawsuitEntity.name}
+                           ref={register({
+                               required: true
+                           })}/>
+                    {errors.lawsuitEntity_name && <p>Name is required!</p>}
                     <br/><br/>
 
                     <label htmlFor={"lawsuitEntity_emb"}>EMBG/EMBS:</label>
                     <br/>
-                    <input type={"text"} id={"lawsuitEntity_emb"} defaultValue={this.props.theLawsuitEntity.emb}/>
+                    <input type={"text"} id={"lawsuitEntity_emb"} name={"lawsuitEntity_emb"}
+                           defaultValue={props.theLawsuitEntity.emb}
+                           ref={register({
+                               required: true,
+                               pattern:{
+                                   value: /^[0-9]*$/,
+                                   message: 'error message'
+                               }
+                           })}/>
+                    {errors.lawsuitEntity_emb && errors.lawsuitEntity_emb.type === "required" &&
+                    <p>The embg/embs is required!</p>}
+                    {errors.lawsuitEntity_emb && errors.lawsuitEntity_emb.type === "pattern" &&
+                    <p>Must only contain numbers</p>}
                     <br/><br/>
 
                     <label>Is the lawsuit entity a person or a company?</label>
@@ -74,8 +80,8 @@ class EditLawsuitEntity extends Component{
                            id={"type_person"}
                            name={"type"}
                            value={"option1"}
-                           checked={this.state.selectedOption === "option1"}
-                           onChange={this.handleOptionChange}
+                           checked={selectedOption === "option1"}
+                           onChange={handleOptionChange}
                     />
                     <label htmlFor={"type_person"}>Person</label>
 
@@ -83,8 +89,8 @@ class EditLawsuitEntity extends Component{
                            id={"type_company"}
                            name={"type"}
                            value={"option2"}
-                           checked={this.state.selectedOption === "option2"}
-                           onChange={this.handleOptionChange}
+                           checked={selectedOption === "option2"}
+                           onChange={handleOptionChange}
                     />
                     <label htmlFor={"type_company"}>Company</label>
 
@@ -105,8 +111,8 @@ class EditLawsuitEntity extends Component{
 
                 </form>
             </div>
-        )
-    }
-}
+    )
+
+};
 
 export default withRouter(EditLawsuitEntity);
