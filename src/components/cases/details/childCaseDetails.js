@@ -117,7 +117,7 @@ const ChildCaseDetails = (props) =>{
                     </Link>
 
                     <Link to={{
-                        pathname: "/documents/add"+props.childCase.id,
+                        pathname: "/documents/add/"+props.childCase.id,
                         caseId: props.childCase.id
                     }}>
                         <button>Add document</button>

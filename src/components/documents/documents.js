@@ -25,6 +25,7 @@ const Documents = (props) =>{
     });
 
     useEffect(()=>{
+        //debugger;
         axios({
             method:"get",
             url: "http://localhost:8080/documents/ofCase/"+ props.theCaseId,
@@ -79,7 +80,7 @@ const Documents = (props) =>{
     };
 
 
-
+    console.log(props);
 
     return(
         <div>

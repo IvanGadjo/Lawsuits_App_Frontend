@@ -64,13 +64,12 @@ const EditLawsuitEntity = (props) =>{
                                required: true,
                                pattern:{
                                    value: /^[0-9]*$/,
-                                   message: 'error message'
                                }
                            })}/>
                     {errors.lawsuitEntity_emb && errors.lawsuitEntity_emb.type === "required" &&
                     <p>The embg/embs is required!</p>}
                     {errors.lawsuitEntity_emb && errors.lawsuitEntity_emb.type === "pattern" &&
-                    <p>Must only contain numbers</p>}
+                    <p>Must only contain numbers!</p>}
                     <br/><br/>
 
                     <label>Is the lawsuit entity a person or a company?</label>

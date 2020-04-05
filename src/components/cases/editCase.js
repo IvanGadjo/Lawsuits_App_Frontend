@@ -10,6 +10,9 @@ import 'react-dropdown/style.css';
 // fixme: When edditing a case, the createdBy field also changes to the editor. Maybe it should stay as before
 
 
+// FIXME: So USEEFECT gi loada docs spored id zatoa okej traboti tamu toa, tuka go ima case-ot preloaded vo theCase
+// fixme: koga ke stavis form validation naprai useefect da go loada od ponovo theCase i da go zapisuva vo props
+
 class EditCase extends Component {
 
 
@@ -35,7 +38,6 @@ class EditCase extends Component {
         // console.log(menuOptions);
         return menuOptions;
     };
-
 
 
     onSelectPlaintiff = (e) =>{
@@ -93,7 +95,7 @@ class EditCase extends Component {
 
     render() {
         return(
-            <div>
+            <div>{console.log(this.props)}
                 <form onSubmit={this.onFormSubmit}>
                     <br/><br/>
                     <h4>Edit the {this.props.theCase.name} case</h4>
@@ -139,6 +141,7 @@ class EditCase extends Component {
                         />
                         <Link to={{
                             pathname: "/lawsuitEntities/add",
+                            //redirectPath: "/cases/edit/"+this.props.theCase.id
                             redirectPath: "/cases"
                         }}>
                             <button>Add new plaintiff</button><br/>

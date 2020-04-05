@@ -1,83 +1,107 @@
-import React,{Component} from "react";
+import React, {Component, useState} from "react";
 import {Link, withRouter} from 'react-router-dom';
+import { useForm } from 'react-hook-form'
 
 // props: onEditDocument, theDocumentInfo, theCaseId, courts, loggedInEmployee
 
-// fixme: When edditing a doc, the createdBy field also changes to the editor. Maybe it should stay as before
+// fixme: When editing a doc, the createdBy field also changes to the editor. Maybe it should stay as before
 
-class EditDocument extends Component{
+const EditDocument = (props) => {
 
-    constructor(props) {
-        super();
+    // constructor(props) {
+    //     super();
+    //
+    //     this.state = {
+    //         selectedOption: props.courts[0].id
+    //     };
+    //
+    //     console.log(props.courts)
+    // }
 
-        this.state = {
-            selectedOption: props.courts[0].id
-        };
+    const { register, handleSubmit, errors } = useForm(); // initialise the hook
 
-        console.log(props.courts)
-    }
+    const [selectedOption, setSelectedOpt] = useState(props.courts[0].id);
 
-    handleOptionChange = (e) =>{
+    const handleOptionChange = (e) =>{
 
-        console.log(e.target.value)
+        //console.log(e.target.value)
 
-        this.setState({
-            selectedOption: e.target.value
-        })
+        // this.setState({
+        //     selectedOption: e.target.value
+        // })
+        setSelectedOpt(e.target.value);
     };
 
 
-    onFormSubmit = (formData) =>{
-        formData.preventDefault();
+    const onFormSubmit = (formData) =>{
+        //formData.preventDefault();
 
         const editedDoc = {
-          "archiveNumber": formData.target.doc_archiveNumber.value,
-          "isInput": formData.target.doc_isInput.checked,
-          "documentDate": formData.target.doc_date.value,
-          "employeeId": this.props.loggedInEmployee.id,
-          "courtId": this.state.selectedOption,
-          "caseId": this.props.theCaseId
+          "archiveNumber": formData.doc_archiveNumber,
+          "isInput": formData.doc_isInput,
+          "documentDate": formData.doc_date,
+          "employeeId": props.loggedInEmployee.id,
+          "courtId": selectedOption,
+          "caseId": props.theCaseId
         };
 
-        const oldId = this.props.theDocumentInfo.id;
+        const oldId = props.theDocumentInfo.id;
 
-        this.props.onEditDocument(editedDoc,oldId);
+        //console.log(editedDoc)
+        props.onEditDocument(editedDoc,oldId);
 
-        // this.props.history.push("/documents/"+this.props.theCaseId);
-        this.props.history.push("/cases");
+        props.history.push("/documents/"+props.theCaseId);
+        //props.history.push("/cases");
     };
 
 
-    render() {
+    // render() {
         return(
             <div>
-                <h3>Edit the info for {this.props.theDocumentInfo.name}</h3>
+                <h3>Edit the info for {props.theDocumentInfo.name}</h3>
                 <br/>
 
-                <form onSubmit={this.onFormSubmit} noValidate>
+                <form onSubmit={handleSubmit(onFormSubmit)} noValidate>
                     <label htmlFor={"doc_archiveNumber"}>New archive number:</label>
-                    <input type={"text"} name={"doc_archiveNumber"} defaultValue={this.props.theDocumentInfo.archiveNumber}/>
+                    <input type={"text"} name={"doc_archiveNumber"}
+                           defaultValue={props.theDocumentInfo.archiveNumber}
+                           ref={register({
+                               required: true,
+                               pattern:{
+                                   value: /^[0-9]*$/,
+                               }
+                           })}/>
+                    {errors.doc_archiveNumber && errors.doc_archiveNumber.type === "required" &&
+                    <p>Archive number is required!</p>}
+                    {errors.doc_archiveNumber && errors.doc_archiveNumber.type === "pattern" &&
+                    <p>Must only contain numbers!</p>}
                     <br/><br/>
 
-                    <input type={"checkbox"} name={"doc_isInput"} defaultChecked={this.props.theDocumentInfo.input}/>
+                    <input type={"checkbox"} name={"doc_isInput"} defaultChecked={props.theDocumentInfo.input}
+                    ref={register()}/>
                     Is this document an input document to our company?
                     <br/><br/>
 
                     <label htmlFor="doc_date">New input date:</label>
                     <div>
-                        <input type="date" name={"doc_date"} id="doc_date_id"/>
+                        <input type="date" name={"doc_date"} id="doc_date_id"
+                               ref={register({
+                                   required: true
+                               })}/>
+                        {errors.doc_date && <p>Date is required!</p>}
                     </div>
                     <br/><br/>
 
 
-                    {this.props.courts.map((c,kluc) =>
+                    {props.courts.map((c,kluc) =>
                         <div key={kluc}>
                         <input type={"radio"}
                                //id={c.id}
                                name={"court"}
                                value={c.id}
-                               defaultChecked={this.state.selectedOption === c.id}
-                               onChange={this.handleOptionChange}
+                               defaultChecked={selectedOption === c.id}
+                               onChange={handleOptionChange}
+
                         />
 
                         <label htmlFor={"court"}>{c.name}</label>
@@ -86,14 +110,14 @@ class EditDocument extends Component{
 
                     <button type="submit">Submit</button>
                     <button type={"reset"}>Reset</button>
-                    <Link to={"/documents/"+this.props.theCaseId}>
+                    <Link to={"/documents/"+props.theCaseId}>
                         <button>Cancel</button>
                     </Link>
                 </form>
             </div>
         )
-    }
-}
+    // }
+};
 
 
 export default withRouter(EditDocument);

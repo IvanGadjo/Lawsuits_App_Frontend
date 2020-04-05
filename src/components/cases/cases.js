@@ -19,7 +19,7 @@ class Cases extends Component{
         console.log(len);
 
         if (len == 0){
-            // render child cases kako obicni cases
+            // render child cases kako obicni cases (se koristi pri search na case koe e child case)
             return (
                 <tbody>
                 {this.props.cases.map((c,kluc)=>
