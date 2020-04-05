@@ -4,6 +4,7 @@ import {withRouter} from 'react-router-dom';
 import EmployeeCheckboxes from "../employees/employeesCheckboxes";
 import Dropdown from 'react-dropdown';
 //import 'react-dropdown/style.css';
+import { useForm } from 'react-hook-form'
 
 
 // props: employees, cases, lawsuitEntities, onAddNewCase, loggedInEmployee
