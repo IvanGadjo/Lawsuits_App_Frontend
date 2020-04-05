@@ -1,13 +1,13 @@
-import React, {Component} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
-import AuthService from "../authentication/AuthService";
 import {withRouter} from 'react-router-dom';
+import { useForm } from 'react-hook-form'
 
 
 
 // props loggedInEmployee, onChangeEmployeeCredentials
 
-// fixme: frkata e pri stavanje na nov username, se povikuva loadAllEmpsFromDB, na ovoj request se desava doFilterInternal
+// fixme: problemot e pri stavanje na nov username, se povikuva loadAllEmpsFromDB, na ovoj request se desava doFilterInternal
 //  od filterot na spring. Tuka pagja bidejki vo filterot go zema username od requestot i usernameto e staroto, pa
 //  ne se sovpagja so novoto i se desava exception
 //  => frkata e sto go zema username od tokenot, a tokenot e so stariot username bidejki e generiran pri log in
@@ -16,41 +16,43 @@ import {withRouter} from 'react-router-dom';
 
 
 
-class EditCredentials extends Component{
+const EditCredentials = (props) =>{
 
-    constructor(props) {
-        super();
-
-        this.Auth = new AuthService();
-        this.onFormSubmit = this.onFormSubmit.bind(this)
-    }
+    const { register, handleSubmit, errors } = useForm(); // initialise the hook
 
 
-    onFormSubmit = (formData) =>{
-        formData.preventDefault();
+    const onFormSubmit = (formData) =>{
+        //formData.preventDefault();
 
-        const username = formData.target.emp_username.value;
-        const password = formData.target.emp_password.value;
-
+        const username = formData.emp_username;
+        const password = formData.emp_password;
+        //console.log(username,password)
         // prvin ova no bez load new emps
-        this.props.onChangeEmployeeCredentials(this.props.loggedInEmployee.id,username,password);
+        props.onChangeEmployeeCredentials(props.loggedInEmployee.id,username,password);
 
-        this.props.history.push("/home")
+        props.history.push("/home")
     };
 
 
-    render() {
         return(
             <div>
                 <h3>Set new username and password</h3>
-                <form onSubmit={this.onFormSubmit}>
+                <form onSubmit={handleSubmit(onFormSubmit)}>
 
                     <label htmlFor={"emp_username"}>New username:</label><br/>
-                    <input type={"text"} defaultValue={this.props.loggedInEmployee.username}
-                           name={"emp_username"}/><br/>
+                    <input type={"text"} defaultValue={props.loggedInEmployee.username}
+                           name={"emp_username"}
+                           ref={register({
+                               required: true
+                           })}/><br/>
+                    {errors.emp_username && <p>A username is required!</p>}
 
                     <label htmlFor={"emp_password"}>New password:</label><br/>
-                    <input type={"text"} name={"emp_password"}/><br/><br/>
+                    <input type={"text"} name={"emp_password"}
+                           ref={register({
+                               required: true
+                           })}/><br/><br/>
+                    {errors.emp_password && <p>Password is required!</p>}
 
                     <button type={"submit"}>Submit</button>
                     <button type={"reset"}>Reset</button>
@@ -60,9 +62,8 @@ class EditCredentials extends Component{
                 </form>
             </div>
         )
-    }
 
 
-}
+};
 
 export default withRouter(EditCredentials);
