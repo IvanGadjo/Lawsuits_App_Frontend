@@ -1,92 +1,135 @@
-import React,{Component} from "react";
+import React, {Component, useState} from "react";
 import {Link, withRouter} from "react-router-dom";
+import { useForm } from 'react-hook-form'
 
 
 // props: theCaseId, allCases, courts, loggedInEmployee, onUploadDocument
 
 
-class AddDocument extends Component{
+const AddDocument = (props) =>{
 
-    constructor(props) {
-        super();
-        this.state = {
-            selectedFile: {},
-            selectedOption: props.courts[0].id
-        }
-    }
+    const { register, handleSubmit, errors } = useForm(); // initialise the hook
 
-    findNameOfCase = () =>{
-        const name = this.props.allCases.find(c => c.id == this.props.theCaseId);
+    const [selectedFile, setSelectedFile] = useState({});
+    const [selectedOption, setSelectedOption] = useState(props.courts[0].id);
+    const [fileType, setFileType] = useState("application/pdf");
+
+
+
+    const findNameOfCase = () =>{
+        const name = props.allCases.find(c => c.id == props.theCaseId);
         return <span>{name.name}</span>;
     };
 
-    handleOptionChange = (e) =>{
-        this.setState({
-            selectedOption: e.target.value
-        })
+    const handleOptionChange = (e) =>{
+        // this.setState({
+        //     selectedOption: e.target.value
+        // })
+        setSelectedOption(e.target.value);
     };
 
-    onFileChangeHandler = (e) =>{
+    const onFileChangeHandler = (e) =>{
         e.preventDefault();
-        this.setState({
-            selectedFile: e.target.files[0]
-        })
+        // this.setState({
+        //     selectedFile: e.target.files[0]
+        // })
+        setSelectedFile(e.target.files[0]);
+    };
 
+    const showNotPdfMessage = () =>{
+      if (fileType == 'application/pdf'){
+          return <p/>
+      }
+      else {
+          return <p>The document must be in pdf format!</p>
+      }
     };
 
 
-    onFormSubmit = (data) =>{
-        data.preventDefault();
+    const onFormSubmit = (data) =>{
+        //data.preventDefault();
+
+        //console.log(selectedFile);
+
+        setFileType(selectedFile.type);
 
 
-        const formData = new FormData();
+        if (selectedFile.type == 'application/pdf') {
 
-        formData.append("file",this.state.selectedFile);
-        const otherParams = {
-            "archiveNumber": data.target.doc_archiveNum.value,
-            "isInput": data.target.doc_isInput.checked,
-            "documentDate": data.target.doc_date.value,
-            "employeeId": this.props.loggedInEmployee.id,
-            "courtId":this.state.selectedOption,
-            "caseId": this.props.theCaseId
-        };
+            const formData = new FormData();
 
-        //new Response(formData).text().then(console.log)
-        this.props.onUploadDoc(formData, otherParams);
+            formData.append("file", selectedFile);
+            const otherParams = {
+                "archiveNumber": data.doc_archiveNum,
+                "isInput": data.doc_isInput,
+                "documentDate": data.doc_date,
+                "employeeId": props.loggedInEmployee.id,
+                "courtId": selectedOption,
+                "caseId": props.theCaseId
+            };
 
-        this.props.history.push('/cases')
+            //console.log(otherParams)
+            //new Response(formData).text().then(console.log)
+
+
+            props.onUploadDoc(formData, otherParams);
+
+            props.history.push('/cases');
+        }
     };
 
-    render() {
-        return(
+    return(
           <div>
-              <h3>Add a document to the {this.findNameOfCase()} case:</h3>
+              <h3>Add a document to the {findNameOfCase()} case:</h3>
 
-              <form onSubmit={this.onFormSubmit}>
+              <form onSubmit={handleSubmit(onFormSubmit)}>
 
                   <label htmlFor={'upload-file'}>Upload new document:</label><br/>
-                  <input type={'file'} name={'upload-file'} onChange={this.onFileChangeHandler}/><br/><br/>
+                  <input type={'file'} name={'upload_file'} onChange={onFileChangeHandler}
+                         ref={register({
+                             required: true
+                         })}/>
+                  {errors.upload_file && errors.upload_file.type === "required" &&
+                  <p>You must choose a file to upload</p>}
+                  {showNotPdfMessage()}
+                  <br/><br/>
 
                   <label htmlFor={"doc_archiveNum"}>Archive number:</label><br/>
-                  <input type={"text"} name={"doc_archiveNum"}/><br/>
+                  <input type={"text"} name={"doc_archiveNum"}
+                         ref={register({
+                             required: true,
+                             pattern:{
+                                 value: /^[0-9]*$/,
+                             }
+                         })}/>
+                  {errors.doc_archiveNum && errors.doc_archiveNum.type === "required" &&
+                  <p>Archive number is required!</p>}
+                  {errors.doc_archiveNum && errors.doc_archiveNum.type === "pattern" &&
+                  <p>Must only contain numbers!</p>}
+                  <br/>
 
-                  <input type={"checkbox"} name={"doc_isInput"}/>
+                  <input type={"checkbox"} name={"doc_isInput"}
+                         ref={register()}/>
                   Is this document an input document to our company?
                   <br/><br/>
 
-                  <label htmlFor="doc_date">New input date:</label>
+                  <label htmlFor="doc_date" >New input date:</label>
                   <div>
-                      <input type="date" name={"doc_date"} id="doc_date_id"/>
+                      <input type="date" name={"doc_date"} id="doc_date_id"
+                             ref={register({
+                                 required: true
+                             })}/>
+                      {errors.doc_date && <p>Date is required!</p>}
                   </div>
                   <br/><br/>
 
-                  {this.props.courts.map((c,kluc) =>
+                  {props.courts.map((c,kluc) =>
                       <div key={kluc}>
                           <input type={"radio"}
                               //id={c.id}
                                  name={"court"}
                                  value={c.id}
-                                 onChange={this.handleOptionChange}
+                                 onChange={handleOptionChange}
                           />
 
                           <label htmlFor={"court"}>{c.name}</label>
@@ -99,8 +142,8 @@ class AddDocument extends Component{
                   </Link>
               </form>
           </div>
-        );
-    }
-}
+    );
+
+};
 
 export default withRouter(AddDocument);

@@ -9,7 +9,7 @@ import 'react-dropdown/style.css';
 
 // fixme: When edditing a case, the createdBy field also changes to the editor. Maybe it should stay as before
 
-
+// od add new LE -> tuka   VS   edit doc -> documents
 // FIXME: So USEEFECT gi loada docs spored id zatoa okej traboti tamu toa, tuka go ima case-ot preloaded vo theCase
 // fixme: koga ke stavis form validation naprai useefect da go loada od ponovo theCase i da go zapisuva vo props
 
