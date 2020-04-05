@@ -17,7 +17,7 @@ const EmployeeCheckboxes = (props) =>{
 
     //console.log(emps)
     //console.log(props.allEmployees)
-    console.log(props)
+    //console.log(props)
 
     return(
         <CheckboxGroup name="emps" value={emps} onChange={setEmps}>
