@@ -16,7 +16,7 @@ class Cases extends Component{
             return c.parentCase == null;
         }).length;
 
-        console.log(len);
+        //console.log(len);
 
         if (len == 0){
             // render child cases kako obicni cases (se koristi pri search na case koe e child case)
@@ -51,19 +51,25 @@ class Cases extends Component{
 
         return (
             <div>
-                <br/><br/>
+
                     <FormSearch onSearch={this.props.onSearch}
-                                onClickReset={this.props.onClickReset}/>
+                                onClickReset={this.props.onClickReset}
+                                className="form-control"/>
                 <br/>
 
                 <h2>Cases:</h2>
 
+
                 <Link to={"/cases/add"}>
-                    <button>Add new case</button>
+                    <button id={"button"} className={"btn"}>Add new case</button>
                 </Link>
 
-                <table id={"cases-table"}>
-                    <thead>
+                <div id={"childCasesMsg"}>* Child cases are blue colored</div>
+
+
+
+                <table id={"cases-table"} className={"table table-hover"}>
+                    <thead className={"thead-light"}>
                         <tr>
 
                                 <th>Case number</th>
@@ -82,15 +88,6 @@ class Cases extends Component{
 
                         </tr>
                     </thead>
-
-
-                    {/*{this.props.cases.filter((c)=>{*/}
-                    {/*    return c.parentCase == null;*/}
-                    {/*}).map((c,kluc)=>*/}
-                    {/*    <CaseDetails allCases={this.props.cases}*/}
-                    {/*                 parentCase={c} key={kluc}*/}
-                    {/*                 onDeleteCase={this.props.onDeleteCase}/>*/}
-                    {/*)}*/}
 
 
                     {this.showCasesDetails()}

@@ -84,8 +84,8 @@ const Documents = (props) =>{
 
     return(
         <div>
-            <table>
-                <thead>
+            <table id={"cases-table"} className={"table table-hover"}>
+                <thead className={"thead-light"}>
                     <tr>
                         <th>(Doc id)</th>
                         <th>name:</th>
@@ -110,25 +110,29 @@ const Documents = (props) =>{
 
 
                             <td>
-                                <button onClick={() =>downloadDocument(di.name,di.downloadUrl)} value={di.downloadUrl}>Download document</button>
-                                <Link to={{
-                                    pathname: "/documents/edit/"+di.id,
-                                    theDocumentInfo: di,
-                                    theCaseId: props.theCaseId
-                                }}>
-                                    <button>Edit this document</button>
-                                </Link>
+                                <div className={"btn-group-vertical"}>
+                                    <button onClick={() =>downloadDocument(di.name,di.downloadUrl)}
+                                            value={di.downloadUrl}
+                                            id={"tableBtn"} className={"btn"}>Download document</button>
+                                    <Link to={{
+                                        pathname: "/documents/edit/"+di.id,
+                                        theDocumentInfo: di,
+                                        theCaseId: props.theCaseId
+                                    }}>
+                                        <button id={"tableBtn"} className={"btn"}>Edit this document</button>
+                                    </Link>
 
-                                <button onClick={() => deleteDocument(di.id)}>Delete</button>
+                                    <button onClick={() => deleteDocument(di.id)}
+                                            id={"tableBtn"} className={"btn"}>Delete</button>
 
-                                <Link to={{
-                                    pathname: "/documents/transfer/"+di.id,
-                                    theDocumentInfo: di,
-                                    thisCaseId: props.theCaseId
-                                }}>
-                                    <button>Transfer to another case</button>
-                                </Link>
-
+                                    <Link to={{
+                                        pathname: "/documents/transfer/"+di.id,
+                                        theDocumentInfo: di,
+                                        thisCaseId: props.theCaseId
+                                    }}>
+                                        <button id={"tableBtn"} className={"btn"}>Transfer to another case</button>
+                                    </Link>
+                                </div>
 
                             </td>
                         </tr>

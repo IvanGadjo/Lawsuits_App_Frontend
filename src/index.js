@@ -3,6 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import $ from'jquery';
+import Popper from'popper.js'
+
 import {BrowserRouter as Router, Redirect, Route} from "react-router-dom";
 import LogIn from "./components/authentication/logIn";
 import RegisterNewUser from "./components/authentication/registerNewUser";

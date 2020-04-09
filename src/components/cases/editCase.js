@@ -136,12 +136,13 @@ const EditCase = (props) => {
     };
 
         return(
-            <div>{console.log(thisCase.caseNumber)}
+            <div className={"container-fluid"}>
                 <form onSubmit={handleSubmit(onFormSubmit)}>
-                    <br/><br/>
+
                     <h4>Edit the {thisCase.name} case</h4>
 
-                    <label htmlFor="case_num">Case number:</label>
+                    <div className={"form-group"}>
+                    <label htmlFor="case_num" className={"smallText"}>Case number:</label>
                     <div>
                         <input type="text" name={"case_num"} id="case_num_id" defaultValue={thisCase.caseNumber}
                                ref={register({
@@ -151,32 +152,42 @@ const EditCase = (props) => {
                                    }
                                })}/>
                         {errors.case_num && errors.case_num.type === "required" &&
-                        <p>Case number is required!</p>}
+                        <p className={"validationErrorText"}>Case number is required!</p>}
                         {errors.case_num && errors.case_num.type === "pattern" &&
-                        <p>Must only contain numbers!</p>}
+                        <p className={"validationErrorText"}>Must only contain numbers!</p>}
+                    </div>
                     </div>
 
-                    <label htmlFor="case_name">Case name:</label>
+
+                    <div className={"form-group"}>
+                    <label htmlFor="case_name" className={"smallText"}>Case name:</label>
                     <div>
                         <input type="text" name={"case_name"} id="case_name_id" defaultValue={thisCase.name}
                                ref={register({
                                    required: true
                                })}/>
                         {errors.case_name && errors.case_name.type === "required" &&
-                        <p>Name is required!</p>}
+                        <p className={"validationErrorText"}>Name is required!</p>}
+                    </div>
                     </div>
 
-                    <label htmlFor="case_basis">Basis:</label>
+
+                    <div className={"form-group"}>
+                    <label htmlFor="case_basis" className={"smallText"}>Basis:</label>
                     <div>
                         <textarea name={"case_basis"} id="case_basis_id" defaultValue={thisCase.basis}
                                   ref={register({
                                       required: true
                                   })}/>
                         {errors.case_basis && errors.case_basis.type === "required" &&
-                        <p>Basis is required!</p>}
+                        <p className={"validationErrorText"}>Basis is required!</p>}
+                    </div>
                     </div>
 
-                    <label htmlFor="case_val">Value of case:</label>
+
+
+                    <div className={"form-group"}>
+                    <label htmlFor="case_val" className={"smallText"}>Value of case:</label>
                     <div>
                         <input type="text" name={"case_val"} id="case_val_id" defaultValue={thisCase.value}
                                ref={register({
@@ -186,66 +197,86 @@ const EditCase = (props) => {
                                    }
                                })}/>
                         {errors.case_val && errors.case_val.type === "required" &&
-                        <p>Value of the case is required!</p>}
+                        <p className={"validationErrorText"}>Value of the case is required!</p>}
                         {errors.case_val && errors.case_val.type === "pattern" &&
-                        <p>Must only contain numbers!</p>}
+                        <p className={"validationErrorText"}>Must only contain numbers!</p>}
+                    </div>
                     </div>
 
-                    <label htmlFor="case_phase">Phase:</label>
+
+                    <div className={"form-group"}>
+                    <label htmlFor="case_phase" className={"smallText"}>Phase:</label>
                     <div>
                         <input type="text" name={"case_phase"} id="case_phase_id" defaultValue={thisCase.phase}
                                ref={register({
                                    required: true
                                })}/>
                         {errors.case_phase && errors.case_phase.type === "required" &&
-                        <p>Phase is required!</p>}
+                        <p className={"validationErrorText"}>Phase is required!</p>}
+                    </div>
                     </div>
 
-                    <label htmlFor="case_executed">Is the case executed:</label>
+
+                    <div className={"form-group"}>
+                    <label htmlFor="case_executed" className={"smallText"}>Is the case executed:</label>
                     <div>
                         <input type="checkbox" name={"case_executed"} id="case_executed_id"
                                ref={register()}/>Executed
                     </div>
-
-
-                    <label htmlFor="case_plantiff">Plaintiff:</label>
-                    <div>
-                        <Dropdown options={loadLawsuitEntitiesNames()}
-                                  onChange={onSelectPlaintiff}
-                                  value={"plaintiff"}
-                                  placeholder={"plaintiffs"}
-                                  id={"case_plaintiff"}
-                        />
-                        <Link to={{
-                            pathname: "/lawsuitEntities/add",
-                            redirectPath: "/cases/edit/"+thisCase.id
-                            //redirectPath: "/cases"
-                        }}>
-                            <button>Add new plaintiff</button><br/>
-                        </Link>
                     </div>
 
 
 
-                    <label htmlFor="case_sued">Sued:</label>
-                    <div>
-                        <Dropdown options={loadLawsuitEntitiesNames()}
-                                  onChange={onSelectSued}
-                                  value={"sued"}
-                                  placeholder={""}
-                                  id={"case_sued"}
-                        />
-                        <Link to={{
-                            pathname: "/lawsuitEntities/add",
-                            redirectPath: "/cases/edit/"+thisCase.id
-                            //redirectPath: "/cases"
-                        }}>
-                            <button>Add new sued</button>
-                        </Link>
+                    <div className={"container-fluid"}>
+                        <div className={"row"}>
+                            <div className={"col-2"}>
+                                <div className={"form-group"}>
+                                <label htmlFor="case_plantiff">Plaintiff:</label>
+                                <div>
+                                    <Dropdown options={loadLawsuitEntitiesNames()}
+                                              onChange={onSelectPlaintiff}
+                                              value={"plaintiff"}
+                                              placeholder={"plaintiffs"}
+                                              id={"case_plaintiff"}
+                                    />
+                                    <Link to={{
+                                        pathname: "/lawsuitEntities/add",
+                                        redirectPath: "/cases/edit/"+thisCase.id
+                                        //redirectPath: "/cases"
+                                    }}>
+                                        <button className={"btn"} id={"button"}>Add new plaintiff</button><br/>
+                                    </Link>
+                                </div>
+                                </div>
+
+
+                                <div className={"form-group"}>
+                                <label htmlFor="case_sued">Sued:</label>
+                                <div>
+                                    <Dropdown options={loadLawsuitEntitiesNames()}
+                                              onChange={onSelectSued}
+                                              value={"sued"}
+                                              placeholder={""}
+                                              id={"case_sued"}
+                                    />
+                                    <Link to={{
+                                        pathname: "/lawsuitEntities/add",
+                                        redirectPath: "/cases/edit/"+thisCase.id
+                                        //redirectPath: "/cases"
+                                    }}>
+                                        <button className={"btn"} id={"button"}>Add new sued</button>
+                                    </Link>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <br/>
 
-                    <label htmlFor="case_proxy">Change proxy:</label>
+
+
+
+                    <label htmlFor="case_proxy" className={"smallText"}>Change proxy:</label>
                     <div>
                         <input type="text" name={"case_proxy"} id="case_proxy_id" defaultValue={thisCase.proxy}
                                ref={register()}/>
@@ -253,11 +284,11 @@ const EditCase = (props) => {
 
                     <br/>
                     <div>
-                        <button type="submit">Save</button>
+                        <button type="submit" className={"btn"} id={"button"}>Save</button>
                         <Link to={"/cases"}>
-                            <button>Cancel</button>
+                            <button className={"btn"} id={"button"}>Cancel</button>
                         </Link>
-                        <button type="reset">Reset</button>
+                        <button type="reset" className={"btn"} id={"button"}>Reset</button>
                     </div>
 
                 </form>

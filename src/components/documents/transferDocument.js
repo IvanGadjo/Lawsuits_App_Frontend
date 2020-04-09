@@ -45,20 +45,22 @@ const TransferDocument = (props) =>{
 
     return(
         <div>
-            <h3>Transfer document {props.theDocumentInfo.name} to another case</h3>
-            <form onSubmit={onFormSubmit}>
-                <Dropdown options={loadCaseNames()}
-                          onChange={onSelectNewCase}
-                          value={"new case"}
-                          placeholder={"new case"}
-                          id={"newCase_id"}
-                />
+            <h4>Transfer document {props.theDocumentInfo.name} to another case</h4>
+            <div className={"col-2"}>
+                <form onSubmit={onFormSubmit}>
+                    <Dropdown options={loadCaseNames()}
+                              onChange={onSelectNewCase}
+                              value={"new case"}
+                              placeholder={"new case"}
+                              id={"newCase_id"}
+                    />
 
-                <button type={"submit"}>Submit</button>
-                <Link to={"/documents/"+props.thisCaseId}>
-                    <button>Cancel</button>
-                </Link>
-            </form>
+                    <button type={"submit"} id={"button"} className={"btn"}>Submit</button>
+                    <Link to={"/documents/"+props.thisCaseId}>
+                        <button id={"button"} className={"btn"}>Cancel</button>
+                    </Link>
+                </form>
+            </div>
         </div>
     )
 };

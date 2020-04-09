@@ -79,7 +79,7 @@ const ChildCaseDetails = (props) =>{
     const renderChildCase = () =>{
 
         return(
-            <tr bgcolor="#f7da63">
+            <tr id={"childCaseDetails"}>
                 <td>{props.childCase.caseNumber}</td>
                 <td>{props.childCase.name}</td>
                 <td>{props.childCase.createdAt.substr(0,10)+" "
@@ -98,14 +98,14 @@ const ChildCaseDetails = (props) =>{
                         pathname: "/employees/"+props.childCase.id,
                         caseId: props.childCase.id
                     }}>
-                        <button>All Employees</button>
+                        <button id={"tableBtn"} className={"btn"}>All Employees</button>
                     </Link>
 
                     <Link to={{
                         pathname: "/employees/add/"+props.childCase.id,
                         caseId: props.childCase.id
                     }}>
-                        <button>Add new employee</button>
+                        <button id={"tableBtn"} className={"btn"}>Add new employee</button>
                     </Link>
                 </td>
                 <td>
@@ -113,14 +113,14 @@ const ChildCaseDetails = (props) =>{
                         pathname: "/documents/"+props.childCase.id,
                         caseId: props.childCase.id
                     }}>
-                        <button>All documents</button>
+                        <button id={"tableBtn"} className={"btn"}>All documents</button>
                     </Link>
 
                     <Link to={{
                         pathname: "/documents/add/"+props.childCase.id,
                         caseId: props.childCase.id
                     }}>
-                        <button>Add document</button>
+                        <button id={"tableBtn"} className={"btn"}>Add document</button>
                     </Link>
                 </td>
                 <td>{props.childCase.phase}</td>
@@ -130,13 +130,13 @@ const ChildCaseDetails = (props) =>{
                         pathname: "/cases/edit/"+props.childCase.id,
                         theCase: props.childCase
                     }}>
-                        <button>Edit</button>
+                        <button id={"tableBtn"} className={"btn"}>Edit</button>
                     </Link>
 
                     <button onClick={() => {
                         props.onDeleteCase(props.childCase.id);
                         props.colapseCallback()
-                    }}>Delete</button>
+                    }} id={"tableBtn"} className={"btn"}>Delete</button>
 
 
                     {renderCollapseButton()}

@@ -16,8 +16,9 @@ const FormSearch = (props) =>{
     return(
         <form onSubmit={onClickSearch}>
             <input name={"searchTerm"} type="text" placeholder="Search" aria-label="Search"/>
-            <button type="submit">Search</button>
-            <button type={"reset"} onClick={()=>{onClickReset()}}>Reset</button>
+            <button type="submit" id={"searchFormBtn"}>Search</button>
+            <button type={"reset"} id={"searchFormBtn"}
+                    onClick={()=>{onClickReset()}}>Reset</button>
         </form>
     );
 

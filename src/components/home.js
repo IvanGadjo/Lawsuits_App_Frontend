@@ -9,22 +9,30 @@ const home = (props) =>{
 
   return(
       <div>
-          <h1>Home screen</h1>
+          <h2>Home screen</h2>
 
-          <h3>Your info:</h3>
-          <p>First name: {props.employee.firstName}</p>
-          <p>Last name: {props.employee.lastName}</p>
-          <p>Username: {props.employee.username}</p>
-          <p>Role: {props.employee.role}</p>
 
-          <br/><br/>
-          <Link to={"/editEmployee"}>
-              <button>Edit info</button>
-          </Link>
+          <div className={"container-fluid"}>
+              <div className={"col-4"} id={"yourInfoCard"}>
+                  <h4>Your info:</h4>
 
-          <Link to={"/confirmOldPassword"}>
-            <button>Edit credentials</button>
-          </Link>
+
+                  <p><span className={"smallText"}>First name:</span> {props.employee.firstName}</p>
+                  <p><span className={"smallText"}>Last name:</span> {props.employee.lastName}</p>
+                  <p><span className={"smallText"}>Username:</span> {props.employee.username}</p>
+                  <p><span className={"smallText"}>Role:</span> {props.employee.role}</p>
+
+                  <br/><br/>
+                  <Link to={"/editEmployee"}>
+                      <button className={"btn"} id={"button"}>Edit info</button>
+                  </Link>
+
+                  <Link to={"/confirmOldPassword"}>
+                    <button className={"btn"} id={"button"}>Edit credentials</button>
+                  </Link>
+              </div>
+              <div className={"col-8"}></div>
+          </div>
 
       </div>
   )

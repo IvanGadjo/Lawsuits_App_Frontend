@@ -39,18 +39,18 @@ class AddEmployee extends Component {
         return(
           <div>
               <form onSubmit={this.onFormSubmit} noValidate>
-                  <br/><br/>
+
                   <EmployeeCheckboxes allEmployees={this.props.employees}
                                       onSelectedEmployeesChange={this.selectedEmployeesChange}/>
                   <br/><br/>
 
 
                   <div>
-                      <button type="submit">Save</button>
+                      <button type="submit" className={"btn"} id={"button"}>Save</button>
                       <Link to={"/cases"}>
-                          <button>Cancel</button>
+                          <button className={"btn"} id={"button"}>Cancel</button>
                       </Link>
-                      <button type="reset">Reset</button>
+                      <button type="reset" className={"btn"} id={"button"}>Reset</button>
                   </div>
               </form>
           </div>

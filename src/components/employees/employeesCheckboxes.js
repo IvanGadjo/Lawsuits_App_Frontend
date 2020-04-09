@@ -20,6 +20,7 @@ const EmployeeCheckboxes = (props) =>{
     //console.log(props)
 
     return(
+        <div className="nav flex-column">
         <CheckboxGroup name="emps" value={emps} onChange={setEmps}>
             {(Checkbox) => (
                 <>
@@ -32,6 +33,7 @@ const EmployeeCheckboxes = (props) =>{
                 </>
             )}
         </CheckboxGroup>
+        </div>
     )
 };
 

@@ -287,26 +287,48 @@ class App extends Component {
         <Router>
 
 
-          <div>
-            <h2 className={"container-fluid p-3 my-3 bg-dark text-white"}>~ The lawsuits app ~</h2>
+          {/* todo: App logo, name and header*/}
 
-            <button type="button" className="form-submit" onClick={this.handleLogout.bind(this)}>Logout</button>
-            <br/><br/>
+          <div className={"container-fluid"}>
 
-            <ul className={"nav nav-tabs"}>
-              <li className={"nav-item"}><Link to={"/home"} activeclassname={"nav-link active"}>Home</Link></li>
-              <li className={"nav-item"}><Link to={"/cases"} activeclassname={"nav-link"}>Cases</Link></li>
-              <li className={"nav-item"}><Link to={"/allEmployees"} activeclassname={"nav-link"}>All Employees</Link></li>
-              <li className={"nav-item"}><Link to={"/allLawsuitEntities"}>All lawsuit entities</Link></li>
-            </ul>
+
+            <div className={"row"}>
+
+              <div className={"col-10"}>
+                <img src={require('./resources/logo_transparent.png')} id={"imgLogo"}/>
+                <h2 id={"masterTitle"}>Wawsuit - The Lawsuits App</h2>
+              </div>
+
+              <div className={"col-2"}>
+                <span className={"badge badge-secondary"}>{this.state.loggedInEmployee.role}</span><br/>
+
+                <button type="button" className="form-submit" id={"logoutButton"}
+                        className={"btn"} id={"button"}
+                        onClick={this.handleLogout.bind(this)}>Logout</button>
+                <br/><br/>
+              </div>
+            </div>
+
+
+            <div className={" btn-group"} id={"navbarButtons"}>
+
+              <button className={"nav-item"}><Link to={"/home"}>Home</Link></button>&nbsp;
+              <button className={"nav-item"}><Link to={"/cases"}>Cases</Link></button>&nbsp;
+              <button className={"nav-item"}><Link to={"/allEmployees"} >All Employees</Link></button>&nbsp;
+              <button className={"nav-item"}><Link to={"/allLawsuitEntities"} >All lawsuit entities</Link></button>&nbsp;
+
+            </div>
           </div>
+          <br/>
+
+
 
 
 
 
           {/* todo: Different paths of the app*/}
 
-          <div>
+          <div className={"container-fluid"} id={"masterPage"}>
             {/*Mozebi ova ne ni treba, bidejki header go loadas vo sekoj dr endpoint, a ovoj endpoint ne se ni povikuva*/}
             <div>
               <Route  path={"/header"} exact>

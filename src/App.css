@@ -41,22 +41,83 @@
 
 
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+/*ul {*/
+/*  list-style-type: none;*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*}*/
+
+/*li{*/
+/*  float: left;*/
+/*  margin: 2px;*/
+/*}*/
+
+#navbarButtons a{
+  text-decoration: none;
+  padding: 3px;
 }
 
-li{
+#masterPage{
+  /*background-color: #b3ffb3;*/
+  /*background-color: #cce6ff;*/
+}
+
+#imgLogo{
+  height: 150px;
+  width: 150px;
+}
+#logoutButton{
   float: left;
-  margin: 2px;
+}
+#masterTitle{
+  display: inline;
+}
+.smallText{
+  display: inline;
+  color: #00284d;
+  font-weight: bold;
+}
+#yourInfoCard{
+  border-radius: 25px;
+  border: 2px solid #00284d;
+  padding: 20px;
+}
+#button{
+  background-color: #00284d;
+  color: white;
+  /*border-color: #00284d;*/
+  border: 0;
+  margin: 5px;
+}
+#searchFormBtn{
+  border: 1px solid #b3b3b3;
+  margin-left: 1px;
+  height: 30px;
+  color: #1a90ff;
+}
+#childCasesMsg{
+  display: inline;
+  color: red;
+  padding-left: 50px;
+}
+#tableBtn{
+  margin: 1px;
+  border: 1px solid gray;
+  background-color: #f2f2f2;
+}
+#childCaseDetails{
+  background-color: #99bbff;
+}
+.validationErrorText{
+  color: red;
+  display: inline;
+  margin-left: 5px;
 }
 
-#cases-table, th, td{
-  margin-left: 30px;
-  margin-top: 30px;
-  border: 1px solid black;
-  border-collapse: collapse;
-  padding: 10px;
+
+/*Samo za testiranje*/
+#tmp{
+  background-color: yellow;
 }
+
 

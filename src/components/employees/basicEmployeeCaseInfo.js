@@ -26,7 +26,7 @@ const BasicEmployeeCaseInfo = (props) =>{
                 'Content-Type': 'application/json',
                 'Authorization' : 'Bearer ' + localStorage.getItem("id_token")
             },
-        }).then(resp =>{
+        }).then(resp =>{console.log(resp)
 
             let casesArray = [];
             let i = 0;

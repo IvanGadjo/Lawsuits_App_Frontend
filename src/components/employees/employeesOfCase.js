@@ -102,7 +102,8 @@ const EmployeesOfCase = (props) =>{
                             <ul >
                                 <h6>{e.firstName} {e.lastName}</h6>
                                 <p>{e.role}</p>
-                                <button onClick={() => removeEmployeeFromCase(e.id)}>Remove from case</button>
+                                <button onClick={() => removeEmployeeFromCase(e.id)}
+                                        className={"btn"} id={"button"}>Remove from case</button>
                             </ul>
                         </li>
                     </ul>

@@ -11,13 +11,15 @@ const AllEmployees = (props) =>{
     return(
         <div>
 
-            <br/><br/>
             <FormSearch onSearch={props.onSearch}
-                        onClickReset={props.onClickReset}/>
+                        onClickReset={props.onClickReset}
+                        className="form-control"/>
             <br/>
 
-            <table id='cases-table'>
-                <thead>
+
+
+            <table id='cases-table' className={"table table-hover"}>
+                <thead className={"thead-light"}>
                     <tr>
                         <th>First name:</th>
                         <th>Last name:</th>

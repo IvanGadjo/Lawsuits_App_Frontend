@@ -190,14 +190,14 @@ const CaseDetails = (props) =>{
                         pathname: "/employees/"+props.parentCase.id,
                         caseId: props.parentCase.id
                     }}>
-                        <button>All Employees</button>
+                        <button id={"tableBtn"} className={"btn"}>All Employees</button>
                     </Link>
 
                     <Link to={{
                         pathname: "/employees/add/"+ props.parentCase.id,
                         caseId: props.parentCase.id
                     }}>
-                        <button>Add new employee</button>
+                        <button id={"tableBtn"} className={"btn"}>Add new employee</button>
                     </Link>
                 </td>
                 <td>
@@ -205,14 +205,14 @@ const CaseDetails = (props) =>{
                         pathname: "/documents/"+props.parentCase.id,
                         caseId: props.parentCase.id
                     }}>
-                        <button>All documents</button>
+                        <button id={"tableBtn"} className={"btn"}>All documents</button>
                     </Link>
 
                     <Link to={{
                         pathname: "/documents/add/"+props.parentCase.id,
                         caseId: props.parentCase.id
                     }}>
-                        <button>Add document</button>
+                        <button id={"tableBtn"} className={"btn"}>Add document</button>
                     </Link>
                 </td>
                 <td>{props.parentCase.phase}</td>
@@ -221,11 +221,12 @@ const CaseDetails = (props) =>{
                         pathname: "/cases/edit/"+props.parentCase.id,
                         theCase: props.parentCase,
                     }}>
-                        <button>Edit</button>
+                        <button id={"tableBtn"} className={"btn"}>Edit</button>
                     </Link>
 
                     {/*<button onClick={() => deleteParentCase(props.parentCase.id)}>Delete</button>*/}
-                    <button onClick={()=>props.onDeleteCase(props.parentCase.id)}>Delete</button>
+                    <button onClick={()=>props.onDeleteCase(props.parentCase.id)}
+                            id={"tableBtn"} className={"btn"}>Delete</button>
 
                     <Dropdown options={loadChildCasesNames(props.parentCase.id)} onChange={onSelect} value={defaultOption} placeholder="Child cases" />
                 </td>
