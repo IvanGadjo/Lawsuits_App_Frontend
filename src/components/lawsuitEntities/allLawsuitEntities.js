@@ -79,7 +79,6 @@ const AllLawsuitEntities = (props) =>{
     return(
         <div>
 
-            <br/><br/>
             <FormSearch onSearch={props.onSearch}
                         onClickReset={props.onClickReset}/>
             <br/>
@@ -91,12 +90,12 @@ const AllLawsuitEntities = (props) =>{
                     pathname: "/lawsuitEntities/add",
                     redirectPath: "/allLawsuitEntities"
                 }}>
-                     <button>Add new lawsuit entity</button>
+                     <button id={"button"} className={"btn"}>Add new lawsuit entity</button>
                 </Link>
             <br/><br/>
 
-            <table>
-                <thead>
+            <table id='cases-table' className={"table table-hover"}>
+                <thead className={"thead-light"}>
                     <tr>
                         <th>Name</th>
                         <th>Person/Company</th>
@@ -115,10 +114,11 @@ const AllLawsuitEntities = (props) =>{
                                     pathname: "/lawsuitEntities/edit/"+le.id,
                                     theLawsuitEntity: le
                                 }}>
-                                    <button>Edit</button>
+                                    <button id={"tableBtn"} className={"btn"}>Edit</button>
                                 </Link>
 
-                                <button onClick={() =>deleteLawsuitEntity(le.id)}>Delete</button>
+                                <button onClick={() =>deleteLawsuitEntity(le.id)}
+                                        id={"tableBtn"} className={"btn"}>Delete</button>
 
                             </td>
                         </tr>

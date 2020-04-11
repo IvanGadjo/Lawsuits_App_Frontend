@@ -36,28 +36,28 @@ const EditCredentials = (props) =>{
 
         return(
             <div>
-                <h3>Set new username and password</h3>
+                <h4>Set new username and password</h4>
                 <form onSubmit={handleSubmit(onFormSubmit)}>
 
-                    <label htmlFor={"emp_username"}>New username:</label><br/>
+                    <label htmlFor={"emp_username"} className={"smallText"}>New username:</label><br/>
                     <input type={"text"} defaultValue={props.loggedInEmployee.username}
                            name={"emp_username"}
                            ref={register({
                                required: true
                            })}/><br/>
-                    {errors.emp_username && <p>A username is required!</p>}
+                    {errors.emp_username && <p className={"validationErrorText"}>A username is required!</p>}
 
-                    <label htmlFor={"emp_password"}>New password:</label><br/>
+                    <label htmlFor={"emp_password"} className={"smallText"}>New password:</label><br/>
                     <input type={"text"} name={"emp_password"}
                            ref={register({
                                required: true
                            })}/><br/><br/>
-                    {errors.emp_password && <p>Password is required!</p>}
+                    {errors.emp_password && <p className={"validationErrorText"}>Password is required!</p>}
 
-                    <button type={"submit"}>Submit</button>
-                    <button type={"reset"}>Reset</button>
+                    <button type={"submit"} className={"btn"} id={"button"}>Submit</button>
+                    <button type={"reset"} className={"btn"} id={"button"}>Reset</button>
                     <Link to={"/home"}>
-                        <button>Cancel</button>
+                        <button className={"btn"} id={"button"}>Cancel</button>
                     </Link>
                 </form>
             </div>

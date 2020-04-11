@@ -57,12 +57,12 @@ const EditDocument = (props) => {
 
     // render() {
         return(
-            <div>
+            <div className={"container-fluid"}>
                 <h3>Edit the info for {props.theDocumentInfo.name}</h3>
                 <br/>
 
                 <form onSubmit={handleSubmit(onFormSubmit)} noValidate>
-                    <label htmlFor={"doc_archiveNumber"}>New archive number:</label>
+                    <label htmlFor={"doc_archiveNumber"} className={"smallText"}>New archive number:</label>
                     <input type={"text"} name={"doc_archiveNumber"}
                            defaultValue={props.theDocumentInfo.archiveNumber}
                            ref={register({
@@ -72,9 +72,9 @@ const EditDocument = (props) => {
                                }
                            })}/>
                     {errors.doc_archiveNumber && errors.doc_archiveNumber.type === "required" &&
-                    <p>Archive number is required!</p>}
+                    <p className={"validationErrorText"}>Archive number is required!</p>}
                     {errors.doc_archiveNumber && errors.doc_archiveNumber.type === "pattern" &&
-                    <p>Must only contain numbers!</p>}
+                    <p className={"validationErrorText"}>Must only contain numbers!</p>}
                     <br/><br/>
 
                     <input type={"checkbox"} name={"doc_isInput"} defaultChecked={props.theDocumentInfo.input}
@@ -82,13 +82,13 @@ const EditDocument = (props) => {
                     Is this document an input document to our company?
                     <br/><br/>
 
-                    <label htmlFor="doc_date">New input date:</label>
+                    <label htmlFor="doc_date" className={"smallText"}>New input date:</label>
                     <div>
                         <input type="date" name={"doc_date"} id="doc_date_id"
                                ref={register({
                                    required: true
                                })}/>
-                        {errors.doc_date && <p>Date is required!</p>}
+                        {errors.doc_date && <p className={"validationErrorText"}>Date is required!</p>}
                     </div>
                     <br/><br/>
 
@@ -108,10 +108,10 @@ const EditDocument = (props) => {
                         </div>
                     )}
 
-                    <button type="submit">Submit</button>
-                    <button type={"reset"}>Reset</button>
+                    <button type="submit" className={"btn"} id={"button"}>Submit</button>
+                    <button type={"reset"} className={"btn"} id={"button"}>Reset</button>
                     <Link to={"/documents/"+props.theCaseId}>
-                        <button>Cancel</button>
+                        <button className={"btn"} id={"button"}>Cancel</button>
                     </Link>
                 </form>
             </div>

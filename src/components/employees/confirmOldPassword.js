@@ -56,14 +56,14 @@ const ConfirmOldPassword = (props) =>{
         <div>
             <form onSubmit={onFormSubmit} noValidate>
                 <br/><br/>
-                <label htmlFor={"old_pass"}>Confirm old password:</label><br/>
-                <input type={"text"} name={"old_pass"}/>
+                <label htmlFor={"old_pass"} className={"smallText"}>Confirm old password:</label><br/>
+                <input type={"password"} name={"old_pass"}/>
 
-                <button type={"submit"}>Submit</button>
-                <button type={"reset"}>Reset</button>
+                <button type={"submit"} className={"btn"} id={"button"}>Submit</button>
+                <button type={"reset"} className={"btn"} id={"button"}>Reset</button>
 
                 <Link to={"/home"}>
-                    <button>Cancel</button>
+                    <button className={"btn"} id={"button"}>Cancel</button>
                 </Link>
 
                 <br/><br/><br/>

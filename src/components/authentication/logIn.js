@@ -48,20 +48,21 @@ class LogIn extends React.Component{
     render() {
 
         return(
-            <div>
+            <div className={"container-fluid"}>
                 <form onSubmit={this.handleFormSubmit}>
                     <h4>Login</h4>
-                    <label htmlFor={'username'}>Username:</label>
+                    <label htmlFor={'username'} className={"smallText"}>Username:</label>
                     <div>
                         <input type='text' name={'username'} onChange={this.handleChange}/>
                     </div>
-                    <label htmlFor={'password'}>Password:</label>
+                    <label htmlFor={'password'} className={"smallText"}>Password:</label>
                     <div>
-                        <input type='text' name={'password'} onChange={this.handleChange}/>
+                        <input type='password' name={'password'} onChange={this.handleChange}/>
                     </div>
 
                     <div>
-                        <input type='submit' className={'form-submit'} value={'submit'} />
+                        <input type='submit' className={'form-submit'} value={'submit'}
+                               className={"btn"} id={"button"}/>
                     </div>
 
 
@@ -69,7 +70,7 @@ class LogIn extends React.Component{
 
                 <br/><br/>
                 <Link to={'/register'}>
-                    <button>Register new user</button>
+                    <button className={"btn"} id={"button"}>Register new user</button>
                 </Link>
             </div>
         )

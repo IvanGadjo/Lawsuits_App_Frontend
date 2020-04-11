@@ -26,34 +26,34 @@ const EditEmployee = (props) =>{
         props.history.push("/home");
     };
 
-    //render() {
+
         return(
-            <div>
-                <h4>Edit your info:</h4>
+            <div className={"container-fluid"}>
+                <h3>Edit your info:</h3>
                 <form onSubmit={handleSubmit(onFormSubmit)}>
-                    <label htmlFor={"emp_firstName"}>New first name:</label><br/>
+                    <label htmlFor={"emp_firstName"} className={"smallText"}>New first name:</label><br/>
                     <input type={"text"} name={"emp_firstName"} defaultValue={props.loggedInEmployee.firstName}
                            ref={register({
                                required: true
                            })}/><br/><br/>
-                    {errors.emp_firstName && <p>First name is required!</p>}
+                    {errors.emp_firstName && <p className={"validationErrorText"}>First name is required!</p>}
 
-                    <label htmlFor={"emp_lastName"}>New last name:</label><br/>
+                    <label htmlFor={"emp_lastName"} className={"smallText"}>New last name:</label><br/>
                     <input type={"text"} name={"emp_lastName"} defaultValue={props.loggedInEmployee.lastName}
                            ref={register({
                                required: true
                            })}/><br/><br/>
-                    {errors.emp_lastName && <p>Last name is required!</p>}
+                    {errors.emp_lastName && <p className={"validationErrorText"}>Last name is required!</p>}
 
-                    <button type={"submit"}>Submit</button>
-                    <button type={"reset"}>Reset</button>
+                    <button type={"submit"} className={"btn"} id={"button"}>Submit</button>
+                    <button type={"reset"} className={"btn"} id={"button"}>Reset</button>
                     <Link to={"/home"}>
-                        <button>Cancel</button>
+                        <button className={"btn"} id={"button"}>Cancel</button>
                     </Link>
                 </form>
             </div>
         )
-    //}
+
 
 };
 

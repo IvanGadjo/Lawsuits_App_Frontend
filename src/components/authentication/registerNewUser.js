@@ -58,45 +58,45 @@ const RegisterNewUser = (props) =>{
 
 
         return(
-            <div>
+            <div className={"container-fluid"}>
                 <form onSubmit={handleSubmit(handleFormSubmit)}>
                     <h4>Register new user</h4>
 
-                    <label htmlFor={'firstName'}>First name:</label>
+                    <label htmlFor={'firstName'} className={"smallText"}>First name:</label>
                     <div>
                         <input type='text' name={'firstName'} onChange={handleChange}
                                ref={register({
                                    required: true
                                })}/>
-                        {errors.firstName && <p>First name is required!</p>}
+                        {errors.firstName && <p className={"validationErrorText"}>First name is required!</p>}
                     </div>
 
-                    <label htmlFor={'lastName'}>Last name:</label>
+                    <label htmlFor={'lastName'} className={"smallText"}>Last name:</label>
                     <div>
                         <input type='text' name={'lastName'} onChange={handleChange}
                                ref={register({
                                    required: true
                                })}/>
-                        {errors.lastName && <p>Last name is required!</p>}
+                        {errors.lastName && <p className={"validationErrorText"}>Last name is required!</p>}
                     </div>
 
 
-                    <label htmlFor={'username'}>Username:</label>
+                    <label htmlFor={'username'} className={"smallText"}>Username:</label>
                     <div>
                         <input type='text' name={'username'} onChange={handleChange}
                                ref={register({
                                    required: true
                                })}/>
-                        {errors.username && <p>A username is required!</p>}
+                        {errors.username && <p className={"validationErrorText"}>A username is required!</p>}
                     </div>
 
-                    <label htmlFor={'password'}>Password:</label>
+                    <label htmlFor={'password'} className={"smallText"}>Password:</label>
                     <div>
                         <input type='text' name={'password'} onChange={handleChange}
                                ref={register({
                                    required: true
                                })}/>
-                        {errors.password && <p>Password is required!</p>}
+                        {errors.password && <p className={"validationErrorText"}>Password is required!</p>}
                     </div>
 
 
@@ -122,12 +122,13 @@ const RegisterNewUser = (props) =>{
                     <label htmlFor={"type_lawyer"}>Lawyer</label>
 
                     <div>
-                        <input type='submit' className={'form-submit'} value={'submit'} />
+                        <input type='submit' className={'form-submit'} value={'submit'}
+                               className={"btn"} id={"button"}/>
 
-                        <button type={"reset"}>Reset</button>
+                        <button type={"reset"} className={"btn"} id={"button"}>Reset</button>
 
                         <Link to={"/login"}>
-                            <button>Cancel</button>
+                            <button className={"btn"} id={"button"}>Cancel</button>
                         </Link>
                     </div>
 

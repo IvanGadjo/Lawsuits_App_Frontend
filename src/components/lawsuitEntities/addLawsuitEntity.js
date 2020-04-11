@@ -85,19 +85,19 @@ const AddLawsuitEntity = (props) =>{
 
 
         return(
-            <div>
+            <div  className={"container-fluid"}>
                 <h3>Add a new lawsuit entity</h3>
                 <form onSubmit={handleSubmit(onFormSubmit)} noValidate>
-                    <label htmlFor={"lawsuitEntity_name"}>Name:</label>
+                    <label htmlFor={"lawsuitEntity_name"} className={"smallText"}>Name:</label>
                     <br/>
                     <input type={"text"} id={"lawsuitEntity_name"} name={"lawsuitEntity_name"} placeholder={"name"}
                            ref={register({
                                required: true
                            })} />
-                    {errors.lawsuitEntity_name && <p>Name is required!</p>}
+                    {errors.lawsuitEntity_name && <p className={"validationErrorText"}>Name is required!</p>}
                     <br/><br/>
 
-                    <label htmlFor={"lawsuitEntity_emb"}>EMBG/EMBS:</label>
+                    <label htmlFor={"lawsuitEntity_emb"} className={"smallText"}>EMBG/EMBS:</label>
                     <br/>
                     <input type={"text"} id={"lawsuitEntity_emb"} name={"lawsuitEntity_emb"}
                            placeholder={"embg/embs"}
@@ -109,9 +109,9 @@ const AddLawsuitEntity = (props) =>{
                                }
                            })}/>
                     {errors.lawsuitEntity_emb && errors.lawsuitEntity_emb.type === "required" &&
-                    <p>The embg/embs is required!</p>}
+                    <p className={"validationErrorText"}>The embg/embs is required!</p>}
                     {errors.lawsuitEntity_emb && errors.lawsuitEntity_emb.type === "pattern" &&
-                    <p>Must only contain numbers</p>}
+                    <p className={"validationErrorText"}>Must only contain numbers</p>}
 
                     <br/><br/>
 
@@ -140,12 +140,12 @@ const AddLawsuitEntity = (props) =>{
 
 
                     <div>
-                        <button type="submit">Submit</button>
+                        <button type="submit" className={"btn"} id={"button"}>Submit</button>
 
-                        <button type="reset">Reset</button>
+                        <button type="reset" className={"btn"} id={"button"}>Reset</button>
 
                         <Link to={props.redirectPath}>
-                            <button>Cancel</button>
+                            <button className={"btn"} id={"button"}>Cancel</button>
                         </Link>
                         {/*<button onClick={() => {*/}
                         {/*    hist.push("/cases/edit/24")*/}

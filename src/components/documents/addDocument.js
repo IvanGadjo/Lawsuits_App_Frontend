@@ -79,22 +79,24 @@ const AddDocument = (props) =>{
     };
 
     return(
-          <div>
+          <div className={"container-fluid"}>
+
               <h3>Add a document to the {findNameOfCase()} case:</h3>
+
 
               <form onSubmit={handleSubmit(onFormSubmit)}>
 
-                  <label htmlFor={'upload-file'}>Upload new document:</label><br/>
+                  <label htmlFor={'upload-file'} className={"smallText"}>Upload new document:</label><br/>
                   <input type={'file'} name={'upload_file'} onChange={onFileChangeHandler}
                          ref={register({
                              required: true
                          })}/>
                   {errors.upload_file && errors.upload_file.type === "required" &&
-                  <p>You must choose a file to upload</p>}
+                  <p className={"validationErrorText"}>You must choose a file to upload</p>}
                   {showNotPdfMessage()}
                   <br/><br/>
 
-                  <label htmlFor={"doc_archiveNum"}>Archive number:</label><br/>
+                  <label htmlFor={"doc_archiveNum"} className={"smallText"}>Archive number:</label><br/>
                   <input type={"text"} name={"doc_archiveNum"}
                          ref={register({
                              required: true,
@@ -103,9 +105,9 @@ const AddDocument = (props) =>{
                              }
                          })}/>
                   {errors.doc_archiveNum && errors.doc_archiveNum.type === "required" &&
-                  <p>Archive number is required!</p>}
+                  <p className={"validationErrorText"}>Archive number is required!</p>}
                   {errors.doc_archiveNum && errors.doc_archiveNum.type === "pattern" &&
-                  <p>Must only contain numbers!</p>}
+                  <p className={"validationErrorText"}>Must only contain numbers!</p>}
                   <br/>
 
                   <input type={"checkbox"} name={"doc_isInput"}
@@ -113,13 +115,13 @@ const AddDocument = (props) =>{
                   Is this document an input document to our company?
                   <br/><br/>
 
-                  <label htmlFor="doc_date" >New input date:</label>
+                  <label htmlFor="doc_date" className={"smallText"}>New input date:</label>
                   <div>
                       <input type="date" name={"doc_date"} id="doc_date_id"
                              ref={register({
                                  required: true
                              })}/>
-                      {errors.doc_date && <p>Date is required!</p>}
+                      {errors.doc_date && <p className={"validationErrorText"}>Date is required!</p>}
                   </div>
                   <br/><br/>
 
@@ -136,9 +138,9 @@ const AddDocument = (props) =>{
                       </div>
                   )}
 
-                  <button type={'submit'}>Submit</button>
+                  <button type={'submit'} className={"btn"} id={"button"}>Submit</button>
                   <Link to={"/cases"}>
-                    <button>Cancel</button>
+                    <button className={"btn"} id={"button"} >Cancel</button>
                   </Link>
               </form>
           </div>
