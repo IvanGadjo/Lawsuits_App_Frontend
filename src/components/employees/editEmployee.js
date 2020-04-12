@@ -23,7 +23,8 @@ const EditEmployee = (props) =>{
 
         props.onEditBasicInfo(editedEmp,props.loggedInEmployee.id);
 
-        props.history.push("/home");
+        setTimeout(()=>{props.history.push("/home")},1000);  // time needed to execute queries in db
+        //props.history.push("/home");
     };
 
 

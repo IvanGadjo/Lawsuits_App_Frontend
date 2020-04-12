@@ -34,10 +34,12 @@ const EditLawsuitEntity = (props) =>{
         };
 
         //console.log(editedLawsuitEntity);
+        //debugger;
 
         props.onEditLawsuitEntity(editedLawsuitEntity,props.theLawsuitEntity.id);
 
-        props.history.push("/allLawsuitEntities");
+        setTimeout(()=>{props.history.push("/allLawsuitEntities")},1000);  // time needed to execute queries in db
+        //props.history.push("/allLawsuitEntities");
 
     };
 

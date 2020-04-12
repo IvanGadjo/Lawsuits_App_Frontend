@@ -109,6 +109,7 @@ class App extends Component {
 
   loadAllLawsuitEntitiesFromDB = () =>{
     lawsuitEntitiesService.loadLawsuitEntities().then(resp =>{
+      //console.log(resp.data)
       this.setState((prevState) =>{
         return{
           lawsuitEntities: resp.data
@@ -141,10 +142,10 @@ class App extends Component {
   };
   editLawsuitEntity = (editedLawsuitEntity, oldId) =>{
     lawsuitEntitiesService.editLawsuitEntity(editedLawsuitEntity, oldId).then(resp =>{
-      // this.setState({
-      //   lawsuitEntities: [...this.state.lawsuitEntities, resp.data]
-      // })
-      this.loadAllLawsuitEntitiesFromDB();
+
+      setTimeout(()=>{this.loadAllLawsuitEntitiesFromDB()},500);  // time needed to execute queries in db
+
+      //this.loadAllLawsuitEntitiesFromDB();
     })
   };
   deleteLawsuitEntity = (id) =>{
@@ -188,10 +189,10 @@ class App extends Component {
   };
   editCase = (editedCase, oldId) =>{
     casesService.editCase(editedCase,oldId).then(resp =>{
-      // this.setState({
-      //   cases: [...this.state.cases,resp.data]
-      // })
-      this.loadAllCasesFromDB();
+
+      setTimeout(()=>{this.loadAllCasesFromDB()},500);  // time needed to execute queries in db
+
+      //this.loadAllCasesFromDB();
     })
   };
   deleteCase = (caseId) =>{
@@ -230,7 +231,8 @@ class App extends Component {
   // Docs
   editDocument = (editedDoc, oldId) =>{
     documentsService.editDoc(editedDoc,oldId).then(resp =>{
-      this.loadAllCasesFromDB();
+      setTimeout(()=>{this.loadAllCasesFromDB()},500);  // time needed to execute queries in db
+      //this.loadAllCasesFromDB();
     })
   };
   deleteDocument = (id) =>{
@@ -245,7 +247,8 @@ class App extends Component {
   // Emps
   editBasicEmployeeInfo = (editedEmployee, oldId)=>{
     employeeService.editBasicEmployeeInfo(editedEmployee,oldId).then(resp =>{
-      this.loadAllEmployeesFromDB();
+      setTimeout(()=>{this.loadAllEmployeesFromDB()},500);  // time needed to execute queries in db
+      //this.loadAllEmployeesFromDB();
     })
   };
     // functionality implemented with hook

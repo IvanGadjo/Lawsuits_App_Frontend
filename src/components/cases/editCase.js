@@ -132,7 +132,9 @@ const EditCase = (props) => {
         console.log(editedCase);
 
         props.onEditCase(editedCase,oldCaseId);
-        props.history.push("/cases");
+
+        setTimeout(()=>{props.history.push("/cases")},1000);  // time needed to execute queries in db
+        //props.history.push("/cases");
     };
 
         return(

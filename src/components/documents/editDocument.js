@@ -50,8 +50,9 @@ const EditDocument = (props) => {
         //console.log(editedDoc)
         props.onEditDocument(editedDoc,oldId);
 
-        props.history.push("/documents/"+props.theCaseId);
-        //props.history.push("/cases");
+        setTimeout(()=>{props.history.push("/documents/"+props.theCaseId)},1000);  // time needed to execute queries in db
+        //props.history.push("/documents/"+props.theCaseId);
+
     };
 
 
