@@ -1,68 +1,31 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Wawsuit--The_Lawsuits_App
+#### Иван Гаџовски, 171095
+Семинарска по предметот веб програмирање, ФИНКИ, зимски семестар 2019/2020
 
-## Available Scripts
 
-In the project directory, you can run:
+### Тема
+Целта на оваа семинарска е изработка на апликација која би го олеснила следењето на сите судски постапки кои се водат во рамките на 
+некоја компанија, нејзината намена е да биде користена од правните лица и нивните раководители во компанијата. 
 
-### `npm start`
+Моделот е замислен така што секоја правна постапка е можно да има максимум 2 „подпостапки" во зависност од тоа до кој суд е стигната 
+истата (основен, апелационен или врховен) при што двете подпостапки се водат како нови правни постапки - од апелационен или врховен суд 
+соодветно (parent-child модел).
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Секој корисник може да направи свој профил на апликацијата каде избира улога - правно лице или пак раководител. На почетната страна се
+прикажани информациите за профилот на корисникот и има можност за промена на истите, како и можност за промена на корисничкото име и
+лозинката.
+Во табот „cases" корисникот може да ја види состојбата на сите тековни правни постапки (број, име, вредност, тужител, тужен...).
+Секоја правна постапка може да биде модифицирана или пак истата може да биде избришана во делот „actions". При клик на dropdown менито
+се прикажуваат сите подпостапки кои соодвествуваат на истата.
+Во делот „Employees on this case" од соодветната постапка може да се видат сите вработени кои работат на постапката, има можност за нивно 
+остранување од истата и можност за додавање нови вработени (претходно мора да се регистрирани на апликацијата). „Documents" ги означува
+сите документи кои произлегуваат од судовите или од компанијата кои се однесуваат на постапката, како и функционалност за додавање нов
+документ или пак промена на истиот и податоците кои се поврзани со него. 
+Табот „all employees" ги прикажува сите вработени и на кои постапки работат, „all lawsuit entities" се однесува на сите правни субјекти
+(тужители/тужени) кои биле регистрирани во апликацијата.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Користени технологии
+Spring Boot, React JS и MySQL
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Стартување на апликацијата
+Команда за стартување: npm start
