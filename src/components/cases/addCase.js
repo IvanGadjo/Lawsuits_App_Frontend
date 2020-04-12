@@ -190,7 +190,10 @@ const AddCase = (props) => {
 
         props.onAddNewCase(newCase);
 
-        props.history.push("/cases")
+        setTimeout(()=>{props.history.push("/cases")},4000);  // time needed to execute queries in db
+        window.location.reload();           // fixme: This must be used in order to properly add a case - with the
+                                            // fixme: async config of the spring boot app
+        //props.history.push("/cases")
     };
 
 
@@ -275,19 +278,6 @@ const AddCase = (props) => {
 
 
 
-                    {/*<div className={"form-group"}>*/}
-                    {/*<label htmlFor="case_parentCase" className={"smallText"}>Parent case:</label>*/}
-                    {/*<div>*/}
-                    {/*    <Dropdown options={loadParentCasesNames()}*/}
-                    {/*              onChange={onSelectParentCase}*/}
-                    {/*              value={"parentCase"}*/}
-                    {/*              placeholder={"parent case"}*/}
-                    {/*              id={"parent_case_id"}*/}
-                    {/*    />*/}
-
-                    {/*</div>*/}
-                    {/*</div>*/}
-
 
 
                     <div className={"form-group"}>
@@ -360,26 +350,6 @@ const AddCase = (props) => {
                     </div>
 
 
-
-
-                    {/*<div className={"form-group"}>*/}
-                    {/*<label htmlFor="case_sued" className={"smallText"}>Sued:</label>*/}
-                    {/*<div>*/}
-                    {/*    <Dropdown options={loadLawsuitEntitiesNames()}*/}
-                    {/*              onChange={onSelectSued}*/}
-                    {/*              value={"sued"}*/}
-                    {/*              placeholder={""}*/}
-                    {/*              id={"case_sued"}*/}
-                    {/*    />*/}
-                    {/*    <Link to={{*/}
-                    {/*        pathname: "/lawsuitEntities/add",*/}
-                    {/*        redirectPath: "/cases/add"*/}
-                    {/*    }}>*/}
-                    {/*        <button className={"btn"} id={"button"}>Add new sued</button>*/}
-                    {/*    </Link>*/}
-                    {/*</div>*/}
-                    {/*<br/>*/}
-                    {/*</div>*/}
 
 
                     <div>

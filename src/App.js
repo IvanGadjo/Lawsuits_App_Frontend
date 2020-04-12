@@ -174,6 +174,8 @@ class App extends Component {
 
       casesService.addEmployeesToCase(newCase.employeesToAdd, resp.data.id);
 
+      //console.log("From APP",resp.data)
+
       this.setState({
         cases: [...this.state.cases,resp.data]
       })
